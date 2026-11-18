@@ -249,11 +249,11 @@ class SieradzMeteo
   def build_pollen()
     var a = self.pollen
     if a == nil return end
-    self.labels[14] = self.tr("OLCHA ","ALDER ") + self.n0(a.find("alder_pollen")) + " zi/m3"
-    self.labels[15] = self.tr("BRZOZA ","BIRCH ") + self.n0(a.find("birch_pollen")) + " zi/m3"
-    self.labels[16] = self.tr("TRAWY ","GRASS ") + self.n0(a.find("grass_pollen")) + " zi/m3"
-    self.labels[17] = self.tr("BYLICA ","MUGWORT ") + self.n0(a.find("mugwort_pollen")) + " zi/m3"
-    self.labels[18] = self.tr("AMBROZJA ","RAGWEED ") + self.n0(a.find("ragweed_pollen")) + " zi/m3"
+    self.labels[14] = self.tr("OLCHA ","ALDER ") + self.n0(a.find("alder_pollen")) + self.tr(" zi/m3", " grains/m3")
+    self.labels[15] = self.tr("BRZOZA ","BIRCH ") + self.n0(a.find("birch_pollen")) + self.tr(" zi/m3", " grains/m3")
+    self.labels[16] = self.tr("TRAWY ","GRASS ") + self.n0(a.find("grass_pollen")) + self.tr(" zi/m3", " grains/m3")
+    self.labels[17] = self.tr("BYLICA ","MUGWORT ") + self.n0(a.find("mugwort_pollen")) + self.tr(" zi/m3", " grains/m3")
+    self.labels[18] = self.tr("AMBROZJA ","RAGWEED ") + self.n0(a.find("ragweed_pollen")) + self.tr(" zi/m3", " grains/m3")
   end
 
   def on_weather(body, status)
