@@ -1,0 +1,3 @@
+Publish vetted v1.0.0-rc1 from this revision.
+The GitHub Actions workflow validates source version, runs installer tests and attaches the Berry file plus SHA-256 checksum.
+This does not modify devices.
