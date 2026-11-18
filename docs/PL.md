@@ -4,7 +4,7 @@
 
 ## Stan projektu
 
-**Opublikowano [MeteoMatrix v1.0.0-rc1](https://github.com/sp7uto/awtrix-meteomatrix/releases/tag/v1.0.0-rc1).** Jest to pierwsze publiczne wydanie przedpremierowe (Release Candidate), oparte na sprawdzonym **SieradzMeteo v1.6**, a nie na v1.5.
+**Opublikowano [MeteoMatrix v1.0.0-rc1](https://github.com/sp7uto/awtrix-meteomatrix/releases/tag/v1.0.0-rc1).** Jest to pierwsze publiczne wydanie przedpremierowe (Release Candidate), oparte na sprawdzonym **SieradzMeteo v1.6**.
 
 Użytkownik potwierdził poprawne działanie MeteoMatrix na **Ulanzi TC001 / AWTRIX NG** po instalacji **obiema metodami**: przez instalator Python oraz panel WWW AWTRIX NG. Oddzielnego sprawdzenia wymagają aktualizacja zainstalowanej wersji i przywracanie poprzedniej wersji (rollback).
 
