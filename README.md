@@ -6,7 +6,7 @@
 
 MeteoMatrix is a planned open-source, location-configurable weather and environment application for **AWTRIX NG** and **Ulanzi TC001 (32×8)**, derived from the original **SieradzMeteo** project.
 
-> **Status: development preview. No installable Berry (.ax) release has been published.**
+> **Status: development preview. No **stable** installable Berry (.ax) release has been published.**
 
 ## Scope
 - Weather, feels-like temperature, precipitation, wind, cloud cover and pressure.
@@ -49,3 +49,16 @@ Not affiliated with AWTRIX NG or Open-Meteo.
 **Architecture:** Open-Meteo APIs → Berry script → AWTRIX NG display. These are feature illustrations, not screenshots of a released device build.
 
 **Hero artwork:** the approved photorealistic TC001 banner is retained separately until its original PNG can be uploaded unchanged. It will not be replaced with an imitation.
+
+
+## Source and development installer
+
+The exact preserved **SieradzMeteo v1.5** reference is at [src/legacy/SieradzMeteo_v1_5.ax](src/legacy/SieradzMeteo_v1_5.ax). The [MeteoMatrix Berry development source](src/MeteoMatrix.ax) adds editable **latitude, longitude and timezone** through AWTRIX NG `@config` while retaining the original pixel-art bitmap table. It is **not yet verified on hardware**, does not yet implement full PL/EN translation and does not include the later v1.6 astronomy animations.
+
+A standard-library Python [backup-first installer](tools/meteomatrix.py) and [Polish](docs/INSTALL_PL.md) / [English](docs/INSTALL_EN.md) installation instructions are provided **for controlled development testing only**. Nothing changes on an AWTRIX device unless `--apply` is specified.
+
+```bash
+python3 -m unittest discover -s tests -v
+python3 tools/meteomatrix.py status --host YOUR_AWTRIX_IP
+python3 tools/meteomatrix.py install --host YOUR_AWTRIX_IP
+```
