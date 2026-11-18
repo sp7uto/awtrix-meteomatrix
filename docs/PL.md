@@ -4,7 +4,7 @@
 
 ## Stan projektu
 
-Projekt znajduje się na etapie przygotowawczym. **Nie ma jeszcze kompletnego, przetestowanego pliku `.ax` do instalacji.** Nie zastępuj nim aktualnie działającego SieradzMeteo.
+Projekt znajduje się na etapie przygotowawczym. **Dostępna jest robocza adaptacja `.ax` oparta na v1.5, ale nie została jeszcze przetestowana na urządzeniu i nie jest wersją stabilną.** Nie zastępuj nim aktualnie działającego SieradzMeteo.
 
 ## Przeznaczenie
 
@@ -53,3 +53,13 @@ Zobacz też [zasady rozwoju](DEVELOPMENT.md) oraz [README](../README.md).
 ![Schemat działania MeteoMatrix](images/how-it-works.svg)
 
 **Schemat:** Open-Meteo → skrypt Berry → wyświetlacz AWTRIX NG. Są to ilustracje funkcji planowanej aplikacji, a nie zrzuty ekranów gotowego wydania.
+
+
+## Kod i instrukcja rozwojowa
+
+- [Historyczny oryginał SieradzMeteo v1.5](../src/legacy/SieradzMeteo_v1_5.ax)
+- [Roboczy skrypt MeteoMatrix](../src/MeteoMatrix.ax) — konfiguracja szerokości i długości geograficznej oraz strefy czasowej
+- [Instalator Python](../tools/meteomatrix.py)
+- [Instrukcja instalacji testowej](INSTALL_PL.md)
+
+Etapy **jeszcze niezrealizowane**: pełne tłumaczenie etykiet PL/EN, późniejsze grafiki astronomiczne, testy na urządzeniu i stabilne wydanie.
