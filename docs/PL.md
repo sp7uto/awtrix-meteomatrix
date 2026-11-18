@@ -63,3 +63,8 @@ Zobacz też [zasady rozwoju](DEVELOPMENT.md) oraz [README](../README.md).
 - [Instrukcja instalacji testowej](INSTALL_PL.md)
 
 Etapy **jeszcze niezrealizowane**: testy tłumaczenia etykiet PL/EN na urządzeniu, grafiki astronomiczne v1.6 (zaimportowane, do weryfikacji), testy na urządzeniu i stabilne wydanie.
+
+
+## Potwierdzenie działania
+
+**Oryginalny SieradzMeteo v1.6 został sprawdzony na urządzeniu Ulanzi TC001 i działa.** Jest naszą bazą referencyjną. Zmieniony MeteoMatrix (ustawienia lokalizacji oraz PL/EN) wymaga osobnego testu na urządzeniu przed wydaniem stabilnym.
