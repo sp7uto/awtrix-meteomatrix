@@ -4,7 +4,7 @@
 
 ## Stan projektu
 
-Projekt znajduje się na etapie przygotowawczym. **Dostępna jest robocza adaptacja `.ax` oparta na v1.5, ale nie została jeszcze przetestowana na urządzeniu i nie jest wersją stabilną.** Nie zastępuj nim aktualnie działającego SieradzMeteo.
+Projekt znajduje się na etapie przygotowawczym. **Dostępna jest robocza adaptacja `.ax` oparta na v1.5, ale została potwierdzona jako działająca na TC001, jednak nie jest jeszcze wersją stabilną.** Nie zastępuj nim aktualnie działającego SieradzMeteo.
 
 ## Przeznaczenie
 
@@ -67,4 +67,7 @@ Etapy **jeszcze niezrealizowane**: testy tłumaczenia etykiet PL/EN na urządzen
 
 ## Potwierdzenie działania
 
-**Oryginalny SieradzMeteo v1.6 został sprawdzony na urządzeniu Ulanzi TC001 i działa.** Jest naszą bazą referencyjną. Zmieniony MeteoMatrix (ustawienia lokalizacji oraz PL/EN) wymaga osobnego testu na urządzeniu przed wydaniem stabilnym.
+**Oryginalny SieradzMeteo v1.6 został sprawdzony na urządzeniu Ulanzi TC001 i działa.** Jest naszą bazą referencyjną. Zmieniony MeteoMatrix został zainstalowany na TC001 i użytkownik potwierdził jego prawidłowe działanie. Instalator aktualizacji i przywracania wymagają osobnej weryfikacji.
+
+
+**Kamień milowy — 18.11.2026:** użytkownik potwierdził poprawne działanie zainstalowanego MeteoMatrix na TC001. Nie jest to jeszcze test wszystkich ustawień ani mechanizmu aktualizacji/przywracania.
