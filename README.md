@@ -86,3 +86,8 @@ Both installation methods have been confirmed successful on a Ulanzi TC001 runni
 - Installation using the AWTRIX NG web interface.
 
 These confirmations apply to **installation and application startup**, not yet to an **upgrade over an existing version**, backup restoration or rollback. Those remain separate release-qualification checks.
+
+
+## Latest published version
+
+**[MeteoMatrix v1.0.0-rc1](https://github.com/sp7uto/awtrix-meteomatrix/releases/tag/v1.0.0-rc1)** — first public release candidate (pre-release). Download the versioned [Berry script](https://github.com/sp7uto/awtrix-meteomatrix/releases/download/v1.0.0-rc1/MeteoMatrix.ax) and [SHA-256 checksum](https://github.com/sp7uto/awtrix-meteomatrix/releases/download/v1.0.0-rc1/MeteoMatrix.ax.sha256). Installation by the Python tool and AWTRIX NG web UI has been verified by the maintainer on TC001. Update-in-place and rollback are not yet independently confirmed. See the [release notes](release/notes-v1.0.0-rc1.md).
