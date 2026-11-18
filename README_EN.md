@@ -37,7 +37,7 @@ These are conceptual illustrations of planned features, not screenshots of an in
 - [Installer (Python standard library)](tools/meteomatrix.py)
 - [Development installation guide](docs/INSTALL_EN.md) and [Polish guide](docs/INSTALL_PL.md)
 
-No hardware verification has been performed; bilingual display labels are implemented provisionally; the approved v1.6 sun/moon animations are now included in source. The installer defaults to a dry run and requires `--apply` for any write.
+On-device operation is confirmed by the maintainer; bilingual display labels are implemented provisionally; the approved v1.6 sun/moon animations are now included in source. The installer defaults to a dry run and requires `--apply` for any write.
 
 
 ### Original v1.6 recovered
@@ -47,4 +47,7 @@ No hardware verification has been performed; bilingual display labels are implem
 
 ### Hardware verification
 
-The original **SieradzMeteo v1.6 is confirmed by the maintainer to work on the Ulanzi TC001**. The modified, location-configurable MeteoMatrix adaptation still needs a separate on-device acceptance test.
+The original **SieradzMeteo v1.6 is confirmed by the maintainer to work on the Ulanzi TC001**. The modified, location-configurable MeteoMatrix adaptation has now also been installed and confirmed working by the maintainer. Update/rollback still require separate testing.
+
+
+**Hardware milestone (2026-11-18):** The maintainer confirms MeteoMatrix was installed and runs successfully on TC001. This does not yet verify every language/location combination or the installer’s backup/restore path.
