@@ -37,7 +37,7 @@ class GuardrailTests(unittest.TestCase):
         original = (ROOT / "src" / "legacy" / "SieradzMeteo_v1_6.ax").read_text(encoding="utf-8")
         derived = (ROOT / "src" / "MeteoMatrix.ax").read_text(encoding="utf-8")
         import re
-        pattern = r'self\.glyphs = \[[\s\S]*?\n  \]'
+        pattern = r'self\.glyphs = \[[\s\S]*?\n\s*\]'
         self.assertEqual(re.search(pattern, original).group(), re.search(pattern, derived).group())
 
     def test_language_switch(self):
