@@ -1,56 +1,45 @@
-# Maintainer guide / Zasady rozwoju
+# MeteoMatrix — developer guide / zasady rozwoju
 
-## Rules / Zasady
+## Verified milestones / Potwierdzone etapy
 
-1. Import the **actual working** SieradzMeteo Berry source before claiming an installable version exists. / Przed pierwszym wydaniem należy pozyskać dokładny działający kod.
-2. Keep approved pixel-art and animations byte-for-byte where feasible; do not substitute recreated art. / Zachować zatwierdzone ikony i animacje.
-3. Do not embed private IP addresses, authentication tokens or credentials. / Nie umieszczać prywatnych adresów ani sekretów.
-4. Make latitude, longitude, timezone and language configurable. / Udostępnić ustawienia lokalizacji i języka.
-5. Validate AWTRIX NG Berry settings syntax and the device update API against the target firmware. / Zweryfikować API i składnię ustawień.
-6. Perform backup and integrity verification **before** installation. / Wykonać kopię i weryfikację sum przed zmianami.
-7. Test a rollback on real hardware before stable release. / Przetestować przywrócenie starej wersji.
-8. Never modify firmware, Wi-Fi, MQTT or unrelated apps as part of MeteoMatrix updates. / Nie zmieniać pozostałej konfiguracji urządzenia.
-9. Ship stable artifacts from version tags, not unreviewed main branch. / Publikować wydania z tagów.
-10. Choose an open-source license before the first reusable public release. / Wybrać licencję przed wydaniem.
+- [x] Public repository and Polish/English documentation.
+- [x] Preserve the original SieradzMeteo v1.6 reference source and approved pixel-art.
+- [x] Implement configurable latitude, longitude, IANA timezone and PL/EN labels.
+- [x] Import 26 screens, Sun/Moon animations and lunar phase from v1.6.
+- [x] Verify basic operation on a physical Ulanzi TC001 (maintainer report).
+- [x] Verify installation through AWTRIX NG web UI (maintainer report).
+- [x] Verify installation through Python tool (maintainer report).
+- [x] Publish [v1.0.0-rc1](https://github.com/sp7uto/awtrix-meteomatrix/releases/tag/v1.0.0-rc1) with a versioned `.ax` and SHA-256 checksum.
+- [x] Run Python installer guardrail tests and GitHub Actions documentation checks.
+- [ ] Independently test an upgrade over an existing MeteoMatrix installation.
+- [ ] Independently test restoration/rollback from an earlier backup.
+- [ ] Verify non-default timezones, alternate locations and both UI language selections.
+- [ ] Validate Berry code through a dedicated firmware-compatible automated check (CI currently tests Python and source preservation, not Berry compilation).
+- [ ] Choose and publish the intended open-source license.
+- [ ] Publish the stable v1.0.0 after acceptance.
 
-## Milestones
+## Version lineage
 
-- [x] Public repository and bilingual documentation
-- [x] Import verified SieradzMeteo v1.6 source (v1.6 recovered and preserved)
-- [ ] Generic configuration and translated labels (coordinates/timezone and PL/EN labels implemented; device verification pending)
-- [ ] Automated validation for the real Berry source
-- [x] Initial API-based backup / conditional-update installer (hardware verification pending)
-- [ ] On-device testing and rollback validation
-- [ ] First release candidate
-- [ ] Stable release and optional AWTRIX Hub listing
+- [`src/legacy/SieradzMeteo_v1_5.ax`](../src/legacy/SieradzMeteo_v1_5.ax): older historical source.
+- [`src/legacy/SieradzMeteo_v1_6.ax`](../src/legacy/SieradzMeteo_v1_6.ax): **verified working reference** with original astronomy and graphics.
+- [`src/MeteoMatrix.ax`](../src/MeteoMatrix.ax): universal adaptation of **v1.6**, verified running on TC001.
 
-Historical SieradzMeteo version numbers are not MeteoMatrix release numbers.
+Legacy SieradzMeteo version numbers and MeteoMatrix release versions are independent.
 
+## Installation and rollback rules
 
-## Current implementation
+- Preserve the approved glyph bitmaps and event animation routines.
+- Keep network coordinates, timezone and language configurable.
+- Never embed credentials or private device-specific addresses in distributed code.
+- Preserve unrelated scripts and device settings (firmware, Wi-Fi, MQTT).
+- Installer must require `--apply` for writes, backup an existing script before modification, verify API responses and compare returned source.
+- Avoid automatic rollback on an ambiguous network response; inspect device state and restore deliberately.
+- Do not claim an initial installation proves safe upgrades and rollback.
+- Publish release assets from a versioned tag; retain integrity checksums.
+- Before a stable release, test upgrade and rollback on real hardware.
 
-The historical v1.5 `.ax` file is preserved unchanged in `src/legacy/`. The development `src/MeteoMatrix.ax` adds `@config` for coordinates and timezone with bitmap content preserved. PL/EN language selection is present but not hardware-verified; v1.6 Moon animations are now present; update/rollback verification remains outstanding. The installer has command-line read-only mode, explicit `--apply`, backup-before-update, conditional API update and source read-back checks. On ambiguous failures it does not attempt a potentially destructive automatic rollback; use explicit restore after inspection.
+## Current release
 
+Public pre-release: [v1.0.0-rc1](https://github.com/sp7uto/awtrix-meteomatrix/releases/tag/v1.0.0-rc1).
 
-## Hardware verification distinction
-
-- Original SieradzMeteo v1.6: **maintainer-confirmed working** on Ulanzi TC001.
-- Universal MeteoMatrix development build: **maintainer-confirmed installed and working** on a physical TC001. Installation method, update and rollback behavior not yet independently validated.
-
-Do not infer verification of the transformed Berry build from successful tests of the original.
-
-
-## Milestone: 2026-11-18
-
-Maintainer reports the adapted MeteoMatrix application installed and working on TC001. Before stable release: document firmware version, exercise a controlled update/backup/restore, and validate language/location settings independently.
-
-
-## Installation acceptance milestone — 2026-11-19
-
-- [x] Install MeteoMatrix using the Python installer — maintainer-confirmed working on TC001.
-- [x] Install MeteoMatrix directly from the AWTRIX NG web UI — maintainer-confirmed working on TC001.
-- [ ] Update an existing MeteoMatrix version using the installer.
-- [ ] Restore previous script from backup and check behavior.
-- [ ] Record configuration and language checks for the first release.
-
-Do not conflate initial installation with update/rollback verification.
+[Installation guide (PL)](INSTALL_PL.md) · [Installation guide (EN)](INSTALL_EN.md)
