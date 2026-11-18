@@ -53,7 +53,7 @@ Not affiliated with AWTRIX NG or Open-Meteo.
 
 ## Source and development installer
 
-The exact preserved **SieradzMeteo v1.5** reference is at [src/legacy/SieradzMeteo_v1_5.ax](src/legacy/SieradzMeteo_v1_5.ax). The [MeteoMatrix Berry development source](src/MeteoMatrix.ax) adds editable **latitude, longitude and timezone** through AWTRIX NG `@config` while retaining the original pixel-art bitmap table. It is **not yet verified on hardware**, does not yet implement full PL/EN translation and does not include the later v1.6 astronomy animations.
+The exact preserved **SieradzMeteo v1.5** reference is at [src/legacy/SieradzMeteo_v1_5.ax](src/legacy/SieradzMeteo_v1_5.ax). The [MeteoMatrix Berry development source](src/MeteoMatrix.ax) adds editable **latitude, longitude and timezone** through AWTRIX NG `@config` while retaining the original pixel-art bitmap table. It is **not yet verified on hardware**, now includes a PL/EN display-language switch (not yet hardware-verified) and does not include the later v1.6 astronomy animations.
 
 A standard-library Python [backup-first installer](tools/meteomatrix.py) and [Polish](docs/INSTALL_PL.md) / [English](docs/INSTALL_EN.md) installation instructions are provided **for controlled development testing only**. Nothing changes on an AWTRIX device unless `--apply` is specified.
 
