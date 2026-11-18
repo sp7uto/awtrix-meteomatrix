@@ -67,7 +67,7 @@ python3 tools/meteomatrix.py install --host YOUR_AWTRIX_IP
 
 ### Recovered original v1.6
 
-The full original [SieradzMeteo v1.6](src/legacy/SieradzMeteo_v1_6.ax) (26 pages, animated Sun/Moon events and lunar phase) was recovered from the project's Library and committed unchanged. The development [MeteoMatrix source](src/MeteoMatrix.ax) now derives from **v1.6** rather than v1.5. Its original pixel-art and event animation routines were retained. Non-default location and language combinations still require separate verification.
+The full original [SieradzMeteo v1.6](src/legacy/SieradzMeteo_v1_6.ax) (26 pages, animated Sun/Moon events and lunar phase) was recovered from the project's Library and committed unchanged. The development [MeteoMatrix source](src/MeteoMatrix.ax) is based on **SieradzMeteo v1.6**. Its original pixel-art and event animation routines were retained. Non-default location and language combinations still require separate verification.
 
 
 ### Device validation status
