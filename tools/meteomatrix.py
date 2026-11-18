@@ -131,8 +131,9 @@ def run(args):
         path = "/api/v1/apps/script-update/" + args.name
         body = {"expected_source": previous.decode("utf-8"), "source": source.decode("utf-8")}
     else:
-        path = "/api/v1/apps/script/" + args.name
-        body = source
+        # Atomic create: do not overwrite a script created after the initial GET.
+        path = "/api/v1/apps/script-update/" + args.name
+        body = {"expected_source": None, "source": source.decode("utf-8")}
     status, payload = request(base, path, method="PUT", body=body, **auth)
     try:
         parse_response(status, payload)
