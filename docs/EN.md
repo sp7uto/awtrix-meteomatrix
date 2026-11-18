@@ -1,66 +1,55 @@
-![MeteoMatrix — project banner for AWTRIX NG](images/hero-meteomatrix.png)
+![MeteoMatrix — project hero banner](images/hero-meteomatrix.png)
 
 # MeteoMatrix — English documentation
 
-## Project status
+## Current status
 
-This is a **development preview**. A development Berry `.ax` adaptation is published, but it has not been hardware-tested and is not a stable release. Do not replace a working weather application with this repository scaffold.
+**[MeteoMatrix v1.0.0-rc1](https://github.com/sp7uto/awtrix-meteomatrix/releases/tag/v1.0.0-rc1) is published.** This is a public **release candidate**, not the final stable v1.0.0. It is based on the tested **SieradzMeteo v1.6**, not v1.5.
 
-## Purpose
+The maintainer has confirmed successful operation on a physical **Ulanzi TC001 / AWTRIX NG**, following installation **by both the Python installer and the AWTRIX NG web interface**. Upgrade-in-place and restoration/rollback still require separate device verification.
 
-MeteoMatrix will provide weather and environment information for an AWTRIX NG display anywhere in the world. The original SieradzMeteo behavior, approved pixel-art glyphs and animations are the design baseline.
+**[Download MeteoMatrix.ax](https://github.com/sp7uto/awtrix-meteomatrix/releases/download/v1.0.0-rc1/MeteoMatrix.ax)** · **[SHA-256 checksum](https://github.com/sp7uto/awtrix-meteomatrix/releases/download/v1.0.0-rc1/MeteoMatrix.ax.sha256)** · **[Bilingual release notes](../release/notes-v1.0.0-rc1.md)**
 
-## Planned data
+## Features
 
-Weather and feels-like temperature, precipitation, snowfall, wind, clouds and pressure; European AQI, PM2.5, PM10 and seasonal pollen; sunrise/sunset, moonrise/moonset and moon phase. Agreed zero readings are suppressed, while temperature remains visible.
+- 26 weather and environment screens.
+- Current and feels-like temperature, precipitation, snowfall, wind, clouds and pressure.
+- European AQI, PM2.5, PM10 and seasonal pollen readings.
+- Sunrise and sunset, moonrise and moonset, current lunar phase.
+- Preserved approved pixel-art icons and animated scenes from SieradzMeteo v1.6.
+- Suppression of selected zero-valued readings (temperature remains visible).
+- Configurable coordinates, IANA timezone and PL/EN text labels.
 
-## Location and language
+## Configuration
 
-The future script will accept latitude, longitude, timezone and Polish or English labels through configurable options.
+| Option | Example (Sieradz, Poland) |
+| --- | --- |
+| Latitude | `51.590748` |
+| Longitude | `18.736974` |
+| Timezone | `Europe/Warsaw` |
+| Language | `pl` or `en` |
 
-**Example only:** Sieradz, Poland — latitude `51.590748`, longitude `18.736974`, timezone `Europe/Warsaw`.
+These values are defaults for the sample location, not required settings. Change them through the Berry app settings in AWTRIX NG.
 
-## Installation policy
+## Installation and safety
 
-An installer will only be released after confirming the supported AWTRIX NG API and testing against actual hardware. It will make a backup before changes, verify the downloaded release and support rollback. Firmware, Wi-Fi, MQTT and unrelated script settings will remain untouched.
+Both installation paths are maintainer-confirmed: using the AWTRIX NG web UI to upload the `.ax` file, or using the repository's Python installer. See the [installation guide](INSTALL_EN.md).
 
-Open-Meteo data availability varies by region and season, especially for pollen.
+The Python tool defaults to a non-writing check, requires explicit `--apply` to modify the device and backs up an existing script before updating it. **Upgrade/rollback have not yet been individually validated on the device.** The tool does not change firmware, Wi-Fi, MQTT or unrelated apps.
 
-See the [development policy](DEVELOPMENT.md) and [main README](../README.md).
+## Sources
 
-
-## Project illustrations
-
-![MeteoMatrix feature overview](images/features-grid.svg)
-
-![MeteoMatrix data flow](images/how-it-works.svg)
-
-These illustrations show the planned features and data flow. They are not real screenshots of a released device build.
-
-
-## Source and development testing
-
-- [Preserved v1.5 original](../src/legacy/SieradzMeteo_v1_6.ax)
-- [MeteoMatrix development source](../src/MeteoMatrix.ax)
+- [MeteoMatrix Berry script](../src/MeteoMatrix.ax)
+- [Tested SieradzMeteo v1.6 original](../src/legacy/SieradzMeteo_v1_6.ax)
 - [Python installer](../tools/meteomatrix.py)
-- [Development installation guide](INSTALL_EN.md)
+- [Developer guide](DEVELOPMENT.md)
 
-English display labels have been added but are not hardware-verified; v1.6 astronomy animations are imported; update and rollback validation are not complete.
+## Visual overview
 
+![Features](images/features-grid.svg)
 
-## Confirmed device behavior
+![Data flow: Open-Meteo → Berry → AWTRIX NG](images/how-it-works.svg)
 
-**The original SieradzMeteo v1.6 has been verified working on a Ulanzi TC001 by the maintainer.** It is the baseline. The modified MeteoMatrix version is now maintainer-confirmed installed and working on TC001. Update and restore workflows still need separate verification.
+These are conceptual illustrations, not photographs of the running screen. Open-Meteo pollen coverage depends on region and season.
 
-
-**Milestone — 2026-11-18:** the maintainer confirms that MeteoMatrix is installed and working on TC001. This does not independently verify all settings, updates or rollback.
-
-
-## Verified installation paths — 2026-11-19
-
-The maintainer confirmed both supported installation paths working on TC001: the Python installer and the AWTRIX NG web interface. Upgrade-in-place and restore/rollback are pending separate confirmation.
-
-
-## First public prerelease
-
-[MeteoMatrix v1.0.0-rc1](https://github.com/sp7uto/awtrix-meteomatrix/releases/tag/v1.0.0-rc1) ships a Berry `.ax` file and SHA-256 checksum. It is a prerelease, not the stable v1.0.0. Read the [bilingual release notes](../release/notes-v1.0.0-rc1.md).
+[Main README](../README.md) · [Polska dokumentacja](PL.md)
