@@ -46,3 +46,8 @@ These illustrations show the planned features and data flow. They are not real s
 - [Development installation guide](INSTALL_EN.md)
 
 English display labels have been added but are not hardware-verified; v1.6 astronomy animations are imported; hardware validation is not complete.
+
+
+## Confirmed device behavior
+
+**The original SieradzMeteo v1.6 has been verified working on a Ulanzi TC001 by the maintainer.** It is the baseline. The modified MeteoMatrix version still requires an independent on-device test before a stable release.
