@@ -1,0 +1,22 @@
+name: Documentation checks
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify bilingual docs and status banner
+        shell: bash
+        run: |
+          set -euo pipefail
+          for file in README.md README_EN.md docs/PL.md docs/EN.md docs/DEVELOPMENT.md CHANGELOG.md; do
+            test -s "$file"
+          done
+          grep -qi 'development preview' README.md
+          grep -qi 'development preview' README_EN.md
+          grep -qi 'No installable Berry' README.md
+          echo "Documentation checks passed"
