@@ -1,3 +1,5 @@
+![MeteoMatrix — weather, air quality, pollen and astronomy for AWTRIX NG on Ulanzi TC001](docs/images/hero-meteomatrix.png)
+
 # MeteoMatrix — Weather, Air Quality & Astronomy for AWTRIX NG
 
 [English](README_EN.md) · [Polski](docs/PL.md)
