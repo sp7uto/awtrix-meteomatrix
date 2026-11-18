@@ -2,6 +2,9 @@
 import importlib.util
 from pathlib import Path
 import unittest
+from unittest.mock import patch
+import argparse
+import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
 spec = importlib.util.spec_from_file_location("installer", ROOT / "tools" / "meteomatrix.py")
@@ -36,6 +39,40 @@ class GuardrailTests(unittest.TestCase):
         import re
         pattern = r'self\.glyphs = \[[\s\S]*?\n    \]'
         self.assertEqual(re.search(pattern, original).group(), re.search(pattern, derived).group())
+
+    def test_language_switch(self):
+        source = (ROOT / "src" / "MeteoMatrix.ax").read_text(encoding="utf-8")
+        self.assertIn('# @config language select', source)
+        self.assertIn('store.get("language")', source)
+        self.assertIn('self.tr("DESZCZ ","RAIN ")', source)
+
+    def test_dry_run_makes_no_write(self):
+        args = argparse.Namespace(name="MeteoMatrix", user=None, host="http://test.invalid",
+                                  command="install", file=ROOT / "src" / "MeteoMatrix.ax",
+                                  backup_dir=ROOT / "backups", apply=False)
+        with patch.object(installer, "get_script", return_value=None):
+            with patch.object(installer, "request") as mocked:
+                installer.run(args)
+                mocked.assert_not_called()
+
+    def test_atomic_create_uses_expected_null(self):
+        args = argparse.Namespace(name="MeteoMatrix", user=None, host="http://test.invalid",
+                                  command="install", file=ROOT / "src" / "MeteoMatrix.ax",
+                                  backup_dir=ROOT / "backups", apply=True)
+        data = args.file.read_bytes()
+        with patch.object(installer, "get_script", side_effect=[None, data]):
+            with patch.object(installer, "request", return_value=(200, b'{"ok":true}')) as mocked:
+                installer.run(args)
+        kwargs = mocked.call_args.kwargs
+        self.assertEqual(kwargs["method"], "PUT")
+        self.assertEqual(kwargs["body"]["expected_source"], None)
+        self.assertIn("/api/v1/apps/script-update/MeteoMatrix", mocked.call_args.args[1])
+
+    def test_backup_creates_private_file(self):
+        with tempfile.TemporaryDirectory() as folder:
+            file = installer.backup(b"original code", "MeteoMatrix", Path(folder))
+            self.assertEqual(file.read_bytes(), b"original code")
+            self.assertEqual(file.stat().st_mode & 0o777, 0o600)
 
 
 if __name__ == "__main__":
