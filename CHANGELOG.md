@@ -21,3 +21,5 @@
 - Rebased MeteoMatrix on v1.6 while retaining 26-page layout, original bitmap artwork, Sun/Moon animated events and lunar phase.
 - Updated pixel-art preservation tests to compare against v1.6.
 - Hardware testing remains pending; no stable release is published.
+
+- Recorded maintainer confirmation that the recovered original SieradzMeteo v1.6 works on a physical TC001; the universal MeteoMatrix adaptation still needs separate verification.
