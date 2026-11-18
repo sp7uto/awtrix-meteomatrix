@@ -25,3 +25,5 @@
 - Recorded maintainer confirmation that the recovered original SieradzMeteo v1.6 works on a physical TC001; the universal MeteoMatrix adaptation still needs separate verification.
 
 - 2026-11-18: Maintainer confirmed universal MeteoMatrix installed and functioning on Ulanzi TC001; release, update and restore qualification remain separate.
+
+- 2026-11-19: Maintainer confirmed successful TC001 installation by both the Python installer and the AWTRIX NG web UI; upgrade and rollback checks remain outstanding.
