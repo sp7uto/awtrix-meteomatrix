@@ -34,3 +34,16 @@ Sieradz (51.590748, 18.736974, Europe/Warsaw) is a sample configuration only; no
 No license is included at this stage; publishing source does not yet grant permission to redistribute or modify it. The license will be selected before the first public installable release.
 
 Not affiliated with AWTRIX NG or Open-Meteo.
+
+
+## Visual overview
+
+![MeteoMatrix features](docs/images/features-grid.svg)
+
+**Features at a glance:** weather, temperature, air quality, pollen, Sun and Moon, configurable location.
+
+![MeteoMatrix architecture](docs/images/how-it-works.svg)
+
+**Architecture:** Open-Meteo APIs → Berry script → AWTRIX NG display. These are feature illustrations, not screenshots of a released device build.
+
+**Hero artwork:** the approved photorealistic TC001 banner is retained separately until its original PNG can be uploaded unchanged. It will not be replaced with an imitation.
