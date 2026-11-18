@@ -4,7 +4,7 @@
 
 [English](README_EN.md) · [Polski](docs/PL.md)
 
-MeteoMatrix is a planned open-source, location-configurable weather and environment application for **AWTRIX NG** and **Ulanzi TC001 (32×8)**, derived from the original **SieradzMeteo** project.
+MeteoMatrix is a planned open-source, location-configurable weather and environment application for **AWTRIX NG** and **Ulanzi TC001 (32×8)**, derived from the original **SieradzMeteo v1.6** project.
 
 > **Status: development preview. No **stable** installable Berry (.ax) release has been published.**
 
@@ -53,7 +53,7 @@ Not affiliated with AWTRIX NG or Open-Meteo.
 
 ## Source and development installer
 
-The exact preserved **SieradzMeteo v1.5** reference is at [src/legacy/SieradzMeteo_v1_5.ax](src/legacy/SieradzMeteo_v1_5.ax). The [MeteoMatrix Berry development source](src/MeteoMatrix.ax) adds editable **latitude, longitude and timezone** through AWTRIX NG `@config` while retaining the original pixel-art bitmap table. It is **not yet verified on hardware**, now includes a PL/EN display-language switch (not yet hardware-verified) and does not include the later v1.6 astronomy animations.
+The exact preserved **SieradzMeteo v1.6** reference is at [src/legacy/SieradzMeteo_v1_6.ax](src/legacy/SieradzMeteo_v1_6.ax). The [MeteoMatrix Berry development source](src/MeteoMatrix.ax) adds editable **latitude, longitude and timezone** through AWTRIX NG `@config` while retaining the original pixel-art bitmap table. It is **not yet verified on hardware**, now includes a PL/EN display-language switch (not yet hardware-verified) and includes the recovered v1.6 astronomy animations (untested on device).
 
 A standard-library Python [backup-first installer](tools/meteomatrix.py) and [Polish](docs/INSTALL_PL.md) / [English](docs/INSTALL_EN.md) installation instructions are provided **for controlled development testing only**. Nothing changes on an AWTRIX device unless `--apply` is specified.
 
@@ -62,3 +62,8 @@ python3 -m unittest discover -s tests -v
 python3 tools/meteomatrix.py status --host YOUR_AWTRIX_IP
 python3 tools/meteomatrix.py install --host YOUR_AWTRIX_IP
 ```
+
+
+### Recovered original v1.6
+
+The full original [SieradzMeteo v1.6](src/legacy/SieradzMeteo_v1_6.ax) (26 pages, animated Sun/Moon events and lunar phase) was recovered from the project's Library and committed unchanged. The development [MeteoMatrix source](src/MeteoMatrix.ax) now derives from **v1.6** rather than v1.5. Its original pixel-art and event animation routines were retained. Configuration/translation and Berry compatibility still require real-device verification.
