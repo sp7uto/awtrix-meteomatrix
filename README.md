@@ -76,3 +76,13 @@ The full original [SieradzMeteo v1.6](src/legacy/SieradzMeteo_v1_6.ax) (26 pages
 
 
 **Hardware milestone (2026-11-18):** The maintainer confirms that the universal MeteoMatrix app is installed and running successfully on Ulanzi TC001. This establishes basic runtime operation, not that every locale, parameter, installer update or rollback pathway has been tested.
+
+
+### Installation verification — maintainer report (2026-11-19)
+
+Both installation methods have been confirmed successful on a Ulanzi TC001 running AWTRIX NG:
+
+- Installation using the MeteoMatrix Python installer.
+- Installation using the AWTRIX NG web interface.
+
+These confirmations apply to **installation and application startup**, not yet to an **upgrade over an existing version**, backup restoration or rollback. Those remain separate release-qualification checks.
