@@ -49,3 +49,8 @@ python3 -m unittest discover -s tests -v
 ```
 
 Nie dotykaj firmware, Wi-Fi ani MQTT: narzędzie do MeteoMatrix nie zmienia tych ustawień.
+
+
+## Potwierdzenie metod instalacji
+
+19.11.2026: użytkownik potwierdził prawidłową instalację przez skrypt Python oraz panel AWTRIX NG na TC001. Aktualizację istniejącego skryptu i przywracanie poprzedniej wersji należy nadal traktować jako nieprzetestowane osobno.
