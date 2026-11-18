@@ -40,3 +40,14 @@ Nie będzie modyfikował firmware, ustawień Wi-Fi, MQTT ani innych aplikacji.
 Dane pogodowe pochodzą z Open-Meteo. Dostępność danych o pyłkach zależy od obszaru i sezonu.
 
 Zobacz też [zasady rozwoju](DEVELOPMENT.md) oraz [README](../README.md).
+
+
+## Ilustracje projektu
+
+![Przegląd funkcji MeteoMatrix](images/features-grid.svg)
+
+**Funkcje w skrócie:** pogoda, temperatura, jakość powietrza, pyłki, Słońce i Księżyc, własna lokalizacja.
+
+![Schemat działania MeteoMatrix](images/how-it-works.svg)
+
+**Schemat:** Open-Meteo → skrypt Berry → wyświetlacz AWTRIX NG. Są to ilustracje funkcji planowanej aplikacji, a nie zrzuty ekranów gotowego wydania.
