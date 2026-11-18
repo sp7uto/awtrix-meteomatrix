@@ -32,9 +32,14 @@ These are conceptual illustrations of planned features, not screenshots of an in
 
 ## Development sources and installer
 
-- [Preserved original Berry source (v1.5)](src/legacy/SieradzMeteo_v1_5.ax)
+- [Preserved original Berry source (v1.5)](src/legacy/SieradzMeteo_v1_6.ax)
 - [MeteoMatrix .ax development adaptation](src/MeteoMatrix.ax) — configurable latitude, longitude and timezone, with original glyph table preserved
 - [Installer (Python standard library)](tools/meteomatrix.py)
 - [Development installation guide](docs/INSTALL_EN.md) and [Polish guide](docs/INSTALL_PL.md)
 
-No hardware verification has been performed; bilingual display labels are implemented provisionally; the newer moon/sun animations are still pending. The installer defaults to a dry run and requires `--apply` for any write.
+No hardware verification has been performed; bilingual display labels are implemented provisionally; the approved v1.6 sun/moon animations are now included in source. The installer defaults to a dry run and requires `--apply` for any write.
+
+
+### Original v1.6 recovered
+
+[Source: SieradzMeteo v1.6](src/legacy/SieradzMeteo_v1_6.ax) is now archived unmodified, including all 26 pages and Sun/Moon animations. [MeteoMatrix.ax](src/MeteoMatrix.ax) is based on that source with configurable coordinates, timezone and PL/EN labels. Hardware validation is pending.
