@@ -1,83 +1,59 @@
-![MeteoMatrix — grafika tytułowa projektu dla AWTRIX NG](images/hero-meteomatrix.png)
+![MeteoMatrix — baner projektu dla AWTRIX NG](images/hero-meteomatrix.png)
 
 # MeteoMatrix — dokumentacja polska
 
 ## Stan projektu
 
-Projekt znajduje się na etapie przygotowawczym. **Dostępna jest robocza adaptacja `.ax` oparta na v1.5, ale została potwierdzona jako działająca na TC001, jednak nie jest jeszcze wersją stabilną.** Nie zastępuj nim aktualnie działającego SieradzMeteo.
+**Opublikowano [MeteoMatrix v1.0.0-rc1](https://github.com/sp7uto/awtrix-meteomatrix/releases/tag/v1.0.0-rc1).** Jest to pierwsze publiczne wydanie przedpremierowe (Release Candidate), oparte na sprawdzonym **SieradzMeteo v1.6**, a nie na v1.5.
 
-## Przeznaczenie
+Użytkownik potwierdził poprawne działanie MeteoMatrix na **Ulanzi TC001 / AWTRIX NG** po instalacji **obiema metodami**: przez instalator Python oraz panel WWW AWTRIX NG. Oddzielnego sprawdzenia wymagają aktualizacja zainstalowanej wersji i przywracanie poprzedniej wersji (rollback).
 
-MeteoMatrix to uniwersalny skrypt pogodowy dla AWTRIX NG / Ulanzi TC001. Użytkownik wybierze lokalizację, strefę czasową i język. Obecna konfiguracja Sieradza służy jako wzorzec zachowania i grafiki.
+**[Pobierz MeteoMatrix.ax](https://github.com/sp7uto/awtrix-meteomatrix/releases/download/v1.0.0-rc1/MeteoMatrix.ax)** · **[Suma SHA-256](https://github.com/sp7uto/awtrix-meteomatrix/releases/download/v1.0.0-rc1/MeteoMatrix.ax.sha256)** · **[Opis wydania PL/EN](../release/notes-v1.0.0-rc1.md)**
 
-## Planowane funkcje
+## Funkcje
 
-- Temperatura rzeczywista i odczuwalna, opady, śnieg, wiatr, zachmurzenie oraz ciśnienie.
-- Jakość powietrza: European AQI, PM2.5 i PM10, a także pyłki roślin w sezonie.
-- Wschody i zachody Słońca oraz Księżyca i aktualna faza Księżyca.
-- Oryginalne, wcześniej zatwierdzone grafiki pikselowe i animacje.
-- Ukrywanie wybranych parametrów o wartości zerowej, z wyjątkiem temperatury.
-- Ustawienia lokalizacji i języka PL/EN bez edycji kodu.
+- 26 ekranów pogodowych i środowiskowych.
+- Temperatura rzeczywista i odczuwalna, opady, śnieg, wiatr, zachmurzenie i ciśnienie.
+- European AQI, PM2.5, PM10 oraz pyłki roślin w sezonie.
+- Wschody i zachody Słońca i Księżyca, faza Księżyca.
+- Oryginalne ikony pikselowe 8×8 i animacje z SieradzMeteo v1.6.
+- Ukrywanie określonych wskazań zerowych, z zachowaniem prezentacji temperatury.
+- Konfiguracja lokalizacji, strefy czasowej i etykiet PL/EN.
 
-## Przykładowa lokalizacja
+## Ustawienia
 
-| Ustawienie | Przykład |
+| Parametr | Przykładowa wartość |
 | --- | --- |
-| Miasto | Sieradz |
-| Latitude | `51.590748` |
-| Longitude | `18.736974` |
-| Timezone | `Europe/Warsaw` |
-| Language | `pl` |
+| Szerokość geograficzna | `51.590748` |
+| Długość geograficzna | `18.736974` |
+| Strefa czasowa | `Europe/Warsaw` |
+| Język | `pl` albo `en` |
 
-To **przykład**, a nie ustawienia wszystkich instalacji.
+Wartości dotyczą Sieradza i są wyłącznie ustawieniami domyślnymi. Konfiguracja odbywa się przez ustawienia aplikacji Berry w AWTRIX NG.
 
-## Instalacja i aktualizacje
+## Instalacja i bezpieczeństwo
 
-Instalator zostanie udostępniony po potwierdzeniu działania API konkretnej wersji AWTRIX NG. Jego zadania obejmą wykonanie kopii skryptu na urządzeniu, weryfikację pobranej wersji, kontrolę błędów i przywrócenie poprzedniej wersji w razie niepowodzenia.
+Obie metody instalacji zostały potwierdzone przez użytkownika:
+1. Bezpośrednie wgranie pliku `.ax` w panelu AWTRIX NG.
+2. Instalator Python z repozytorium.
 
-Nie będzie modyfikował firmware, ustawień Wi-Fi, MQTT ani innych aplikacji.
+Szczegóły: **[Instrukcja instalacji PL](INSTALL_PL.md)**. Instalator ma tryb kontrolny bez zapisu, wymaga jawnego `--apply`, zachowuje kopię przy aktualizacji istniejącego skryptu i obsługuje ręczne przywrócenie. **Aktualizacja istniejącej aplikacji i rollback nie zostały jeszcze osobno zweryfikowane na urządzeniu.**
 
-## Użyte źródła
+Nie zmieniamy firmware, konfiguracji Wi-Fi, MQTT ani innych aplikacji.
 
-Dane pogodowe pochodzą z Open-Meteo. Dostępność danych o pyłkach zależy od obszaru i sezonu.
+## Kod źródłowy
 
-Zobacz też [zasady rozwoju](DEVELOPMENT.md) oraz [README](../README.md).
-
-
-## Ilustracje projektu
-
-![Przegląd funkcji MeteoMatrix](images/features-grid.svg)
-
-**Funkcje w skrócie:** pogoda, temperatura, jakość powietrza, pyłki, Słońce i Księżyc, własna lokalizacja.
-
-![Schemat działania MeteoMatrix](images/how-it-works.svg)
-
-**Schemat:** Open-Meteo → skrypt Berry → wyświetlacz AWTRIX NG. Są to ilustracje funkcji planowanej aplikacji, a nie zrzuty ekranów gotowego wydania.
-
-
-## Kod i instrukcja rozwojowa
-
-- [Historyczny oryginał SieradzMeteo v1.6](../src/legacy/SieradzMeteo_v1_6.ax)
-- [Roboczy skrypt MeteoMatrix](../src/MeteoMatrix.ax) — konfiguracja szerokości i długości geograficznej oraz strefy czasowej
+- [MeteoMatrix — skrypt Berry](../src/MeteoMatrix.ax)
+- [Działający pierwowzór SieradzMeteo v1.6](../src/legacy/SieradzMeteo_v1_6.ax)
 - [Instalator Python](../tools/meteomatrix.py)
-- [Instrukcja instalacji testowej](INSTALL_PL.md)
+- [Zasady rozwoju](DEVELOPMENT.md)
 
-Etapy **jeszcze niezrealizowane**: testy tłumaczenia etykiet PL/EN na urządzeniu, grafiki astronomiczne v1.6 (zaimportowane, do weryfikacji), testy na urządzeniu i stabilne wydanie.
+## Ilustracje
 
+![Przegląd funkcji](images/features-grid.svg)
 
-## Potwierdzenie działania
+![Schemat działania — Open-Meteo → Berry → AWTRIX NG](images/how-it-works.svg)
 
-**Oryginalny SieradzMeteo v1.6 został sprawdzony na urządzeniu Ulanzi TC001 i działa.** Jest naszą bazą referencyjną. Zmieniony MeteoMatrix został zainstalowany na TC001 i użytkownik potwierdził jego prawidłowe działanie. Instalator aktualizacji i przywracania wymagają osobnej weryfikacji.
+Grafiki przedstawiają koncepcję funkcji i architektury, a nie zrzuty ekranu z urządzenia. Dostępność pyłków z Open-Meteo zależy od lokalizacji i sezonu.
 
-
-**Kamień milowy — 18.11.2026:** użytkownik potwierdził poprawne działanie zainstalowanego MeteoMatrix na TC001. Nie jest to jeszcze test wszystkich ustawień ani mechanizmu aktualizacji/przywracania.
-
-
-## Potwierdzone metody instalacji — 19.11.2026
-
-Użytkownik potwierdził działanie obu metod: instalatora Python oraz bezpośredniego wgrywania przez interfejs AWTRIX NG na TC001. Potwierdzenie dotyczy instalacji i uruchomienia aplikacji. Aktualizacja istniejącej wersji i przywracanie kopii pozostają osobnymi testami.
-
-
-## Pierwsze wydanie publiczne
-
-Opublikowano [MeteoMatrix v1.0.0-rc1](https://github.com/sp7uto/awtrix-meteomatrix/releases/tag/v1.0.0-rc1) z plikiem `MeteoMatrix.ax` i sumą SHA-256. To wersja przedpremierowa, nie ostateczne wydanie stabilne. Zobacz [opis PL/EN](../release/notes-v1.0.0-rc1.md).
+[Repozytorium główne](../README.md) · [English documentation](EN.md)
