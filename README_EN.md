@@ -37,4 +37,4 @@ These are conceptual illustrations of planned features, not screenshots of an in
 - [Installer (Python standard library)](tools/meteomatrix.py)
 - [Development installation guide](docs/INSTALL_EN.md) and [Polish guide](docs/INSTALL_PL.md)
 
-No hardware verification has been performed; bilingual display labels and the newer moon/sun animations are still pending. The installer defaults to a dry run and requires `--apply` for any write.
+No hardware verification has been performed; bilingual display labels are implemented provisionally; the newer moon/sun animations are still pending. The installer defaults to a dry run and requires `--apply` for any write.
