@@ -1,0 +1,471 @@
+# @name SieradzMeteo
+# @desc Sieradz - pogoda, jakosc powietrza, pylki i opady
+# @version 1.5
+# @display 32x8
+
+import json
+
+class SieradzMeteo
+  var wurl, aurl, purl, weather, air, pollen, daily
+  var labels, colors, page, glyphs
+  var ticks, busy, weather_at, air_at, pollen_at, scroll_opts
+  var temp_fill, feels_fill
+
+  def init()
+    self.wurl = "https://api.open-meteo.com/v1/forecast?latitude=51.590748&longitude=18.736974" +
+      "&current=temperature_2m,apparent_temperature,precipitation,snowfall,weather_code,cloud_cover,shortwave_radiation,pressure_msl,wind_speed_10m,wind_gusts_10m,soil_temperature_6cm" +
+      "&daily=daylight_duration,temperature_2m_min,sunrise,sunset&forecast_days=2" +
+      "&temperature_unit=celsius&wind_speed_unit=kmh&precipitation_unit=mm&timezone=Europe%2FWarsaw"
+
+    # Oddzielne zapytania: brak pylkow poza sezonem nie blokuje EAQI/PM.
+    self.aurl = "https://air-quality-api.open-meteo.com/v1/air-quality?latitude=51.590748&longitude=18.736974" +
+      "&current=european_aqi,pm2_5,pm10&domains=cams_europe"
+    self.purl = "https://air-quality-api.open-meteo.com/v1/air-quality?latitude=51.590748&longitude=18.736974" +
+      "&current=alder_pollen,birch_pollen,grass_pollen,mugwort_pollen,ragweed_pollen&domains=cams_europe"
+
+    self.weather = nil
+    self.air = nil
+    self.pollen = nil
+    self.daily = nil
+    self.page = 0
+    self.ticks = 0
+    self.busy = false
+    self.weather_at = 0
+    self.air_at = 0
+    self.pollen_at = 0
+    self.temp_fill = 0x0088FF
+    self.feels_fill = 0x0088FF
+
+    self.scroll_opts = {"mode":"wrap", "repeat":1, "speed":100, "whenFits":"static"}
+
+    # Indeksy 0-10: wskazania podstawowe.
+    # 11: gleba, 12: dlugosc dnia, 13: przymrozek jutro
+    # 14-18: olcha, brzoza, trawy, bylica, ambrozja
+    # 19: snieg, 20: grad, 21: wschod, 22: zachod
+    self.labels = [
+      "T --°C", "OD --°C", "DESZCZ -- mm", "CH --%",
+      "SL -- W/m2", "P -- hPa", "W -- km/h", "G -- km/h",
+      "EAQI --", "PM2.5 -- ug/m3", "PM10 -- ug/m3",
+      "GL --°C", "DZIEN --", "PRZYM --°C",
+      "OLCHA -- zi/m3", "BRZOZA -- zi/m3", "TRAWY -- zi/m3",
+      "BYLICA -- zi/m3", "AMBROZJA -- zi/m3",
+      "SNIEG -- cm", "GRAD", "WSCHOD --:--", "ZACHOD --:--"
+    ]
+
+    self.colors = [
+      0x00D5FF, 0x66BBFF, 0x3388FF, 0xBBBBBB,
+      0xFFCC00, 0xFFFFFF, 0x66DDFF, 0xFFAA44,
+      0x00DD66, 0x44DDBB, 0xFFCC44,
+      0x99DD66, 0xFFDD55, 0x77BBFF,
+      0x88DD33, 0x88DD33, 0x88DD33, 0xFFCC44, 0xFFCC44,
+      0xBBEEFF, 0xFFFFFF, 0xFFCF32, 0xFF952A
+    ]
+
+    # Paleta bitmap: . = brak, W biel, T kolor termometru,
+    # B niebieski, C blekit, G zielony, Y zolty,
+    # O pomaranczowy, R czerwony, D braz, S szary.
+    # Kazda bitmapa ma dokladnie 8 wierszy po 8 znakow.
+    self.glyphs = [
+      ["..WWW...","..WTW...","..WTW...","..WTW...","..WTW...",".WTTTW..",".WTTTW..","..WWW..."],
+      ["..W.WWW.",".WWW.WTW","..W..WTW",".WWW.WTW",".WCW.WTW",".WCW.WTW",".WCW.WTW",".W.W.WWW"],
+      ["...B....","..BBB...","..BBCB..",".BBCCBB.","BBBWWBBB","BBBBWBBB",".BBBBBB.","..BBBB.."],
+      ["........","..SSS...",".SWWWS..","SWWWWWS.","WWWWWWWW",".SSSSSS.","........","........"],
+      ["...Y....",".Y.Y..Y.","..OYYO..","Y.OYYO.Y","Y.OYYO.Y","..OYYO..",".Y.Y..Y.","...Y...."],
+      ["..WWWW..",".W....W.","W..W...W","W...R..W","W..RR..W","W.R....W",".WWWWWW.","........"],
+      ["........","...CCC..","..C...C.","CCCCCCC.","......C.",".CCCCC..",".....C..","..CCC..."],
+      ["...OOO..","..O...O.","YYYYYOO.",".....OO.","OOOOOOO.","......O.",".OOOOO..","........"],
+      ["......RR","......RR","....OORR","....OORR","..YYOORR","..YYOORR","GGYYOORR","GGYYOORR"],
+      ["........",".G..C.G.","....G...","C.G....C","...G....",".C...G..","....C...",".G...C.."],
+      ["........",".YY..OO.",".YY..OO.","........","...YY...","...YY...",".OO.....",".OO....."],
+      [".....WWW","..GG.WTW",".GGG.WTW","..GG.WTW",".D..WTTW","DDDDWTTW","DDDD.WWW","DDDDDDDD"],
+      ["...Y....",".Y.Y.Y..","..OYYO..","YYYYYYY.","..OYYO..",".Y.Y.Y..","..CCCCC.","........"],
+      ["..WWW...","..WBW...","..WBW.C.","..WBWCCC","..WBW.C.",".WBBBW..",".WBBBW..","..WWW..."],
+      ["..GG...Y",".GGGG.Y.","GGGGGG..","GGGGGG.Y",".GGGGG..","..D.D...","...DD...","...DD..."],
+      ["..GG...Y",".GGGG.Y.","GGGGGG..","GGGGGG.Y",".GGGGG..","..D.D...","...DD...","...DD..."],
+      [".......Y","...G..Y.","..GG.G..",".GGG.G.Y","GGGGGG..",".GGGGG..","..GGG...","........"],
+      [".....Y..","..W..Y..",".WWW.Y..","WWYWW...",".WWW....","..G.....",".GGG....",".G.G...."],
+      [".....Y..","..W..Y..",".WWW.Y..","WWYWW...",".WWW....","..G.....",".GGG....",".G.G...."],
+      ["...W....",".W.C.W..","..WCW...","WWWCWWWW","..WCW...",".W.C.W..","...W....","........"],
+      ["..SSSS..",".SWWWW.S","SSWWWWSS",".SSSSSS.","........",".WC..CW.",".CWWC...","...WC..."],
+      ["........","...YY...","..OYYO..",".OYYYYO.","CCCCCCCC","..W.....",".WWW....",".W.W...."],
+      ["........","........","..OYYO..",".OYYYYO.","CCCCCCCC",".W.W....",".WWW....","..W....."]
+    ]
+  end
+
+  def n0(v)
+    if v == nil return "--" end
+    var half = v >= 0 ? 0.5 : -0.5
+    return str(int(v + half))
+  end
+
+  def n1(v)
+    if v == nil return "--" end
+    return format("%.1f", v)
+  end
+
+  def temp_color(v)
+    if v == nil return 0x888888 end
+    if v <= 0 return 0x1268FF end
+    if v <= 5 return 0x18C9FF end
+    if v <= 15 return 0x39DD38 end
+    if v <= 20 return 0xFFDD22 end
+    if v <= 25 return 0xFF9922 end
+    return 0xFF3333
+  end
+
+  def weather_code()
+    if self.weather == nil return nil end
+    return self.weather.find("weather_code")
+  end
+
+  def positive(v, threshold)
+    return v != nil && v >= threshold
+  end
+
+  # Ilosc opadu jest niezbedna, by nie pokazywac zer.
+  # Snowfall podawany jest w cm, precipitation w mm.
+  def is_snow()
+    if self.weather == nil return false end
+    var snow = self.weather.find("snowfall")
+    if self.positive(snow, 0.05) return true end
+    var c = self.weather_code()
+    var p = self.weather.find("precipitation")
+    return self.positive(p, 0.05) && c != nil &&
+      (c == 71 || c == 73 || c == 75 || c == 77 || c == 85 || c == 86)
+  end
+
+  # WMO 96 i 99: burza z gradem. Model nie podaje masy gradu.
+  def is_hail()
+    if self.weather == nil return false end
+    var c = self.weather_code()
+    var p = self.weather.find("precipitation")
+    return self.positive(p, 0.05) && c != nil && (c == 96 || c == 99)
+  end
+
+  def build_weather()
+    var w = self.weather
+    if w == nil return end
+    var t = w.find("temperature_2m")
+    var f = w.find("apparent_temperature")
+    self.temp_fill = self.temp_color(t)
+    self.feels_fill = self.temp_color(f)
+    self.colors[0] = self.temp_fill
+    self.colors[1] = self.feels_fill
+
+    self.labels[0] = "T " + self.n0(t) + "°C"
+    self.labels[1] = "OD " + self.n0(f) + "°C"
+    self.labels[2] = "DESZCZ " + self.n1(w.find("precipitation")) + " mm"
+    self.labels[3] = "CH " + self.n0(w.find("cloud_cover")) + "%"
+    self.labels[4] = "SL " + self.n0(w.find("shortwave_radiation")) + " W/m2"
+    self.labels[5] = "P " + self.n0(w.find("pressure_msl")) + " hPa"
+    self.labels[6] = "W " + self.n0(w.find("wind_speed_10m")) + " km/h"
+    self.labels[7] = "G " + self.n0(w.find("wind_gusts_10m")) + " km/h"
+    self.labels[11] = "GL " + self.n0(w.find("soil_temperature_6cm")) + "°C"
+
+    var snow = w.find("snowfall")
+    if self.positive(snow, 0.05)
+      self.labels[19] = "SNIEG " + self.n1(snow) + " cm"
+    else
+      # Kod pogodowy wskazuje snieg, ale ilosc zaokragla sie do 0.
+      self.labels[19] = "SNIEG"
+    end
+    if self.is_hail()
+      self.labels[20] = "GRAD"
+    end
+  end
+
+  # Open-Meteo daje lokalny zapis ISO: YYYY-MM-DDTHH:MM.
+  def clock_hm(v)
+    if v == nil return nil end
+    var m = re.search("T([0-9][0-9]:[0-9][0-9])", str(v))
+    if m == nil return nil end
+    return m[1]
+  end
+
+  def build_daily()
+    var d = self.daily
+    if d == nil return end
+    var light = d.find("daylight_duration")
+    if light != nil && size(light) > 0 && light[0] != nil
+      var seconds = int(light[0])
+      var hh = int(seconds / 3600)
+      var mm = int((seconds % 3600) / 60)
+      self.labels[12] = "DZIEN " + str(hh) + "h " + str(mm) + "m"
+    end
+    var rise = d.find("sunrise")
+    if rise != nil && size(rise) > 0
+      var tm = self.clock_hm(rise[0])
+      if tm != nil self.labels[21] = "WSCHOD " + tm end
+    end
+    var sunset_list = d.find("sunset")
+    if sunset_list != nil && size(sunset_list) > 0
+      var tm = self.clock_hm(sunset_list[0])
+      if tm != nil self.labels[22] = "ZACHOD " + tm end
+    end
+    var mins = d.find("temperature_2m_min")
+    if mins != nil && size(mins) > 1 && mins[1] != nil
+      self.labels[13] = "PRZYM JUTRO " + self.n0(mins[1]) + "°C"
+    end
+  end
+
+  def build_air()
+    var a = self.air
+    if a == nil return end
+    var q = a.find("european_aqi")
+    self.labels[8] = "EAQI " + self.n0(q)
+    self.labels[9] = "PM2.5 " + self.n0(a.find("pm2_5")) + " ug/m3"
+    self.labels[10] = "PM10 " + self.n0(a.find("pm10")) + " ug/m3"
+    if q != nil
+      if q <= 20
+        self.colors[8] = 0x00DD66
+      elif q <= 40
+        self.colors[8] = 0x88DD00
+      elif q <= 60
+        self.colors[8] = 0xFFDD00
+      elif q <= 80
+        self.colors[8] = 0xFF8800
+      elif q <= 100
+        self.colors[8] = 0xFF3300
+      else
+        self.colors[8] = 0xBB44FF
+      end
+    end
+  end
+
+  def build_pollen()
+    var a = self.pollen
+    if a == nil return end
+    self.labels[14] = "OLCHA " + self.n0(a.find("alder_pollen")) + " zi/m3"
+    self.labels[15] = "BRZOZA " + self.n0(a.find("birch_pollen")) + " zi/m3"
+    self.labels[16] = "TRAWY " + self.n0(a.find("grass_pollen")) + " zi/m3"
+    self.labels[17] = "BYLICA " + self.n0(a.find("mugwort_pollen")) + " zi/m3"
+    self.labels[18] = "AMBROZJA " + self.n0(a.find("ragweed_pollen")) + " zi/m3"
+  end
+
+  def on_weather(body, status)
+    if body != nil && status == 200
+      try
+        var d = json.load(body)
+        if isinstance(d, map)
+          var c = d.find("current")
+          if isinstance(c, map)
+            self.weather = c
+            self.weather_at = now_ms()
+            self.build_weather()
+          end
+          var daydata = d.find("daily")
+          if isinstance(daydata, map)
+            self.daily = daydata
+            self.build_daily()
+          end
+        end
+      except .. as err, msg
+        log("Meteo: " + msg)
+      end
+    else
+      log("Meteo HTTP: " + str(status))
+    end
+    http.get(self.aurl, / b, st -> self.on_air(b, st))
+  end
+
+  def on_air(body, status)
+    if body != nil && status == 200
+      try
+        var d = json.load(body)
+        if isinstance(d, map)
+          var c = d.find("current")
+          if isinstance(c, map)
+            self.air = c
+            self.air_at = now_ms()
+            self.build_air()
+          end
+        end
+      except .. as err, msg
+        log("Air: " + msg)
+      end
+    else
+      log("Air HTTP: " + str(status))
+    end
+    # Brak danych sezonowych nie moze blokowac jakosci powietrza.
+    http.get(self.purl, / b, st -> self.on_pollen(b, st))
+  end
+
+  def on_pollen(body, status)
+    self.busy = false
+    if body == nil || status != 200
+      self.pollen = nil
+      return
+    end
+    try
+      var d = json.load(body)
+      if isinstance(d, map)
+        var c = d.find("current")
+        if isinstance(c, map)
+          self.pollen = c
+          self.pollen_at = now_ms()
+          self.build_pollen()
+        else
+          self.pollen = nil
+        end
+      end
+    except .. as err, msg
+      self.pollen = nil
+      log("Pylki: " + msg)
+    end
+  end
+
+  def loop()
+    if self.ticks <= 0 && !self.busy
+      self.busy = true
+      self.ticks = 600
+      http.get(self.wurl, / b, st -> self.on_weather(b, st))
+    end
+    self.ticks -= 1
+  end
+
+  def duration()
+    return 7000
+  end
+
+  # Nie pokazuj wartosci, ktore zaokraglaja sie do zera.
+  # Wyjatki: T, OD, CH i temperatura gleby (rowniez 0 C).
+  # Brak danych nie jest wartoscia zero.
+  def visible(i)
+    if i == 0 || i == 1 || i == 3 return true end
+
+    if i == 12
+      if self.daily == nil return false end
+      var x = self.daily.find("daylight_duration")
+      return x != nil && size(x) > 0 && self.positive(x[0], 1)
+    end
+
+    if i == 13
+      if self.daily == nil return false end
+      var x = self.daily.find("temperature_2m_min")
+      return x != nil && size(x) > 1 && x[1] != nil && x[1] <= 0
+    end
+
+    if i == 21 || i == 22
+      if self.daily == nil return false end
+      var arr = self.daily.find(i == 21 ? "sunrise" : "sunset")
+      return arr != nil && size(arr) > 0 && self.clock_hm(arr[0]) != nil
+    end
+
+    if i == 19 return self.is_snow() end
+    if i == 20 return self.is_hail() end
+
+    if i >= 14 && i <= 18
+      if self.pollen == nil return false end
+      var names = ["alder_pollen", "birch_pollen", "grass_pollen", "mugwort_pollen", "ragweed_pollen"]
+      return self.positive(self.pollen.find(names[i - 14]), 0.5)
+    end
+
+    if i == 8 || i == 9 || i == 10
+      if self.air == nil return false end
+      var keys = ["european_aqi", "pm2_5", "pm10"]
+      return self.positive(self.air.find(keys[i - 8]), 0.5)
+    end
+
+    if self.weather == nil return false end
+    if i == 11
+      return self.weather.find("soil_temperature_6cm") != nil
+    end
+
+    var names = ["temperature_2m", "apparent_temperature",
+      "precipitation", "cloud_cover", "shortwave_radiation",
+      "pressure_msl", "wind_speed_10m", "wind_gusts_10m"]
+    if i >= 2 && i <= 7
+      var v = self.weather.find(names[i])
+      if i == 2
+        return self.positive(v, 0.05) && !self.is_snow() && !self.is_hail()
+      end
+      return self.positive(v, 0.5)
+    end
+    return false
+  end
+
+  def ensure_visible()
+    var n = 0
+    while n < size(self.labels) && !self.visible(self.page)
+      self.page = (self.page + 1) % size(self.labels)
+      n += 1
+    end
+  end
+
+  def next_page()
+    self.page = (self.page + 1) % size(self.labels)
+    self.ensure_visible()
+  end
+
+  def on_hide()
+    self.next_page()
+  end
+
+  def on_button(btn)
+    if btn == "select"
+      self.next_page()
+      return true
+    end
+    return false
+  end
+
+  def draw_glyph()
+    var art = self.glyphs[self.page]
+    var y = 0
+    while y < 8
+      var row = art[y]
+      var x = 0
+      while x < 8
+        var ch = row[x]
+        var c = 0
+        if ch == "W"
+          c = 0xFFFFFF
+        elif ch == "T"
+          c = self.page == 1 ? self.feels_fill : self.temp_fill
+        elif ch == "B"
+          c = 0x1268FF
+        elif ch == "C"
+          c = 0x44DDFF
+        elif ch == "G"
+          c = 0x36DD33
+        elif ch == "Y"
+          c = 0xFFFF27
+        elif ch == "O"
+          c = 0xFF9922
+        elif ch == "R"
+          c = 0xFF3333
+        elif ch == "D"
+          c = 0x8D5E23
+        elif ch == "S"
+          c = 0x999999
+        end
+        if c != 0
+          pixel(x, y, c)
+        end
+        x += 1
+      end
+      y += 1
+    end
+  end
+
+  def draw()
+    self.ensure_visible()
+    clear()
+    font("small")
+    self.draw_glyph()
+    scroll_text(9, 6, width() - 9,
+      self.labels[self.page], self.colors[self.page], self.scroll_opts)
+
+    var stamp = self.weather_at
+    if self.page >= 8 && self.page <= 10
+      stamp = self.air_at
+    elif self.page >= 14 && self.page <= 18
+      stamp = self.pollen_at
+    end
+    if stamp == 0 || now_ms() - stamp > 1800000
+      pixel(31, 0, 0xFF0000)
+    end
+  end
+end
+
+return SieradzMeteo()
