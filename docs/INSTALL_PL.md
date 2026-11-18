@@ -1,6 +1,6 @@
 # Instalowanie MeteoMatrix — wersja rozwojowa
 
-> **Uwaga:** źródło `src/MeteoMatrix.ax` jest adaptacją zachowanego SieradzMeteo v1.5. Nie jest jeszcze sprawdzone na prawdziwym TC001. Nie jest to stabilne wydanie. Obsługa angielskich etykiet i nowych animacji astronomicznych pozostaje do zrobienia.
+> **Uwaga:** źródło `src/MeteoMatrix.ax` jest adaptacją zachowanego SieradzMeteo v1.5. Nie jest jeszcze sprawdzone na prawdziwym TC001. Nie jest to stabilne wydanie. Etykiety PL/EN są dostępne w wersji roboczej, ale wymagają testu na urządzeniu. Nowe animacje astronomiczne pozostają do opracowania.
 
 ## Wymagania
 
