@@ -6,6 +6,7 @@
 # @config latitude number "Latitude" default=51.590748 min=-90 max=90 step=0.000001
 # @config longitude number "Longitude" default=18.736974 min=-180 max=180 step=0.000001
 # @config timezone text "Timezone (IANA)" default="Europe/Warsaw"
+# @config language select "Language / Jezyk" options=pl,en default=pl
 
 import json
 
@@ -13,9 +14,10 @@ class SieradzMeteo
   var wurl, aurl, purl, weather, air, pollen, daily
   var labels, colors, page, glyphs
   var ticks, busy, weather_at, air_at, pollen_at, scroll_opts
-  var temp_fill, feels_fill
+  var temp_fill, feels_fill, language
 
   def init()
+    self.language = store.get("language")
     var lat = str(store.get("latitude"))
     var lon = str(store.get("longitude"))
     var tz = str(store.get("timezone"))
@@ -51,13 +53,13 @@ class SieradzMeteo
     # 14-18: olcha, brzoza, trawy, bylica, ambrozja
     # 19: snieg, 20: grad, 21: wschod, 22: zachod
     self.labels = [
-      "T --°C", "OD --°C", "DESZCZ -- mm", "CH --%",
-      "SL -- W/m2", "P -- hPa", "W -- km/h", "G -- km/h",
+      "T --°C", self.tr("OD --°C","FEELS --°C"), self.tr("DESZCZ -- mm","RAIN -- mm"), self.tr("CH --%","CLOUD --%"),
+      self.tr("SL -- W/m2","SUN -- W/m2"), "P -- hPa", self.tr("W -- km/h","WIND -- km/h"), self.tr("G -- km/h","GUST -- km/h"),
       "EAQI --", "PM2.5 -- ug/m3", "PM10 -- ug/m3",
-      "GL --°C", "DZIEN --", "PRZYM --°C",
-      "OLCHA -- zi/m3", "BRZOZA -- zi/m3", "TRAWY -- zi/m3",
-      "BYLICA -- zi/m3", "AMBROZJA -- zi/m3",
-      "SNIEG -- cm", "GRAD", "WSCHOD --:--", "ZACHOD --:--"
+      self.tr("GL --°C","SOIL --°C"), self.tr("DZIEN --","DAY --"), self.tr("PRZYM --°C","FROST --°C"),
+      self.tr("OLCHA -- zi/m3","ALDER -- /m3"), self.tr("BRZOZA -- zi/m3","BIRCH -- /m3"), self.tr("TRAWY -- zi/m3","GRASS -- /m3"),
+      self.tr("BYLICA -- zi/m3","MUGWORT -- /m3"), self.tr("AMBROZJA -- zi/m3","RAGWEED -- /m3"),
+      self.tr("SNIEG -- cm","SNOW -- cm"), self.tr("GRAD","HAIL"), self.tr("WSCHOD --:--","SUNRISE --:--"), self.tr("ZACHOD --:--","SUNSET --:--")
     ]
 
     self.colors = [
@@ -98,6 +100,10 @@ class SieradzMeteo
       ["........","...YY...","..OYYO..",".OYYYYO.","CCCCCCCC","..W.....",".WWW....",".W.W...."],
       ["........","........","..OYYO..",".OYYYYO.","CCCCCCCC",".W.W....",".WWW....","..W....."]
     ]
+  end
+
+  def tr(pl, en)
+    return self.language == "en" ? en : pl
   end
 
   def n0(v)
@@ -161,24 +167,24 @@ class SieradzMeteo
     self.colors[1] = self.feels_fill
 
     self.labels[0] = "T " + self.n0(t) + "°C"
-    self.labels[1] = "OD " + self.n0(f) + "°C"
-    self.labels[2] = "DESZCZ " + self.n1(w.find("precipitation")) + " mm"
-    self.labels[3] = "CH " + self.n0(w.find("cloud_cover")) + "%"
-    self.labels[4] = "SL " + self.n0(w.find("shortwave_radiation")) + " W/m2"
+    self.labels[1] = self.tr("OD ","FEELS ") + self.n0(f) + "°C"
+    self.labels[2] = self.tr("DESZCZ ","RAIN ") + self.n1(w.find("precipitation")) + " mm"
+    self.labels[3] = self.tr("CH ","CLOUD ") + self.n0(w.find("cloud_cover")) + "%"
+    self.labels[4] = self.tr("SL ","SUN ") + self.n0(w.find("shortwave_radiation")) + " W/m2"
     self.labels[5] = "P " + self.n0(w.find("pressure_msl")) + " hPa"
-    self.labels[6] = "W " + self.n0(w.find("wind_speed_10m")) + " km/h"
-    self.labels[7] = "G " + self.n0(w.find("wind_gusts_10m")) + " km/h"
-    self.labels[11] = "GL " + self.n0(w.find("soil_temperature_6cm")) + "°C"
+    self.labels[6] = self.tr("W ","WIND ") + self.n0(w.find("wind_speed_10m")) + " km/h"
+    self.labels[7] = self.tr("G ","GUST ") + self.n0(w.find("wind_gusts_10m")) + " km/h"
+    self.labels[11] = self.tr("GL ","SOIL ") + self.n0(w.find("soil_temperature_6cm")) + "°C"
 
     var snow = w.find("snowfall")
     if self.positive(snow, 0.05)
-      self.labels[19] = "SNIEG " + self.n1(snow) + " cm"
+      self.labels[19] = self.tr("SNIEG ","SNOW ") + self.n1(snow) + " cm"
     else
       # Kod pogodowy wskazuje snieg, ale ilosc zaokragla sie do 0.
-      self.labels[19] = "SNIEG"
+      self.labels[19] = self.tr("SNIEG","SNOW")
     end
     if self.is_hail()
-      self.labels[20] = "GRAD"
+      self.labels[20] = self.tr("GRAD","HAIL")
     end
   end
 
@@ -198,21 +204,21 @@ class SieradzMeteo
       var seconds = int(light[0])
       var hh = int(seconds / 3600)
       var mm = int((seconds % 3600) / 60)
-      self.labels[12] = "DZIEN " + str(hh) + "h " + str(mm) + "m"
+      self.labels[12] = self.tr("DZIEN ","DAY ") + str(hh) + "h " + str(mm) + "m"
     end
     var rise = d.find("sunrise")
     if rise != nil && size(rise) > 0
       var tm = self.clock_hm(rise[0])
-      if tm != nil self.labels[21] = "WSCHOD " + tm end
+      if tm != nil self.labels[21] = self.tr("WSCHOD ","SUNRISE ") + tm end
     end
     var sunset_list = d.find("sunset")
     if sunset_list != nil && size(sunset_list) > 0
       var tm = self.clock_hm(sunset_list[0])
-      if tm != nil self.labels[22] = "ZACHOD " + tm end
+      if tm != nil self.labels[22] = self.tr("ZACHOD ","SUNSET ") + tm end
     end
     var mins = d.find("temperature_2m_min")
     if mins != nil && size(mins) > 1 && mins[1] != nil
-      self.labels[13] = "PRZYM JUTRO " + self.n0(mins[1]) + "°C"
+      self.labels[13] = self.tr("PRZYM JUTRO ","FROST TOMORROW ") + self.n0(mins[1]) + "°C"
     end
   end
 
@@ -243,11 +249,11 @@ class SieradzMeteo
   def build_pollen()
     var a = self.pollen
     if a == nil return end
-    self.labels[14] = "OLCHA " + self.n0(a.find("alder_pollen")) + " zi/m3"
-    self.labels[15] = "BRZOZA " + self.n0(a.find("birch_pollen")) + " zi/m3"
-    self.labels[16] = "TRAWY " + self.n0(a.find("grass_pollen")) + " zi/m3"
-    self.labels[17] = "BYLICA " + self.n0(a.find("mugwort_pollen")) + " zi/m3"
-    self.labels[18] = "AMBROZJA " + self.n0(a.find("ragweed_pollen")) + " zi/m3"
+    self.labels[14] = self.tr("OLCHA ","ALDER ") + self.n0(a.find("alder_pollen")) + " zi/m3"
+    self.labels[15] = self.tr("BRZOZA ","BIRCH ") + self.n0(a.find("birch_pollen")) + " zi/m3"
+    self.labels[16] = self.tr("TRAWY ","GRASS ") + self.n0(a.find("grass_pollen")) + " zi/m3"
+    self.labels[17] = self.tr("BYLICA ","MUGWORT ") + self.n0(a.find("mugwort_pollen")) + " zi/m3"
+    self.labels[18] = self.tr("AMBROZJA ","RAGWEED ") + self.n0(a.find("ragweed_pollen")) + " zi/m3"
   end
 
   def on_weather(body, status)
