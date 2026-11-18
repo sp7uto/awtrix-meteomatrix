@@ -2,7 +2,7 @@
 
 # MeteoMatrix — AWTRIX NG weather & environment dashboard
 
-**Status: development preview. No installable Berry file is available yet.**
+**Available: [v1.0.0-rc1](https://github.com/sp7uto/awtrix-meteomatrix/releases/tag/v1.0.0-rc1) — a public prerelease, not stable v1.0.0.**
 
 MeteoMatrix aims to turn the proven SieradzMeteo display into a customizable application for any location, initially targeting **AWTRIX NG on Ulanzi TC001 (32×8)**.
 
@@ -56,3 +56,8 @@ The original **SieradzMeteo v1.6 is confirmed by the maintainer to work on the U
 ### Installation verified on TC001
 
 The maintainer reports successful installation and operation by **both the Python installer and the AWTRIX NG web interface** (2026-11-19). Updating an existing installation and rollback are not yet separately confirmed.
+
+
+## First public pre-release
+
+**[v1.0.0-rc1](https://github.com/sp7uto/awtrix-meteomatrix/releases/tag/v1.0.0-rc1)** is published with the versioned Berry `.ax` script and a SHA-256 checksum. See [release notes](release/notes-v1.0.0-rc1.md). This is a release candidate; update and rollback still require dedicated verification.
