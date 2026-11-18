@@ -45,4 +45,4 @@ These illustrations show the planned features and data flow. They are not real s
 - [Python installer](../tools/meteomatrix.py)
 - [Development installation guide](INSTALL_EN.md)
 
-English display labels, later astronomy animations and hardware validation are not complete.
+English display labels have been added but are not hardware-verified; later astronomy animations and hardware validation are not complete.
