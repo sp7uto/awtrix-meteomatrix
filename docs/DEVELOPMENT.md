@@ -30,3 +30,11 @@ Historical SieradzMeteo version numbers are not MeteoMatrix release numbers.
 ## Current implementation
 
 The historical v1.5 `.ax` file is preserved unchanged in `src/legacy/`. The development `src/MeteoMatrix.ax` adds `@config` for coordinates and timezone with bitmap content preserved. PL/EN language selection is present but not hardware-verified; v1.6 Moon animations are now present; hardware validation remains outstanding. The installer has command-line read-only mode, explicit `--apply`, backup-before-update, conditional API update and source read-back checks. On ambiguous failures it does not attempt a potentially destructive automatic rollback; use explicit restore after inspection.
+
+
+## Hardware verification distinction
+
+- Original SieradzMeteo v1.6: **maintainer-confirmed working** on Ulanzi TC001.
+- Universal MeteoMatrix development build: **not yet verified** after coordinate/timezone and localization changes.
+
+Do not infer verification of the transformed Berry build from successful tests of the original.
