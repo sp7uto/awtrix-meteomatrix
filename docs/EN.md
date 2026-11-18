@@ -1,3 +1,5 @@
+![MeteoMatrix — project banner for AWTRIX NG](images/hero-meteomatrix.png)
+
 # MeteoMatrix — English documentation
 
 ## Project status
