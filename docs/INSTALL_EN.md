@@ -45,3 +45,8 @@ python3 -m unittest discover -s tests -v
 ```
 
 The installer does not change firmware, Wi-Fi, MQTT or unrelated scripts.
+
+
+## Verified installation methods
+
+2026-11-19: the maintainer confirmed working installs through both the Python installer and the AWTRIX NG web panel on TC001. Upgrading an existing app and backup restoration remain separate tests.
