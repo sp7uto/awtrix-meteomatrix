@@ -6,7 +6,7 @@
 
 A colorful weather and environment dashboard for **AWTRIX NG / Ulanzi TC001** with animated pixel art, customizable location and Polish/English labels.
 
-**[Download latest release](https://github.com/sp7uto/awtrix-meteomatrix/releases/latest)** · **[Release v1.0.0-rc1](https://github.com/sp7uto/awtrix-meteomatrix/releases/tag/v1.0.0-rc1)** · **[Source code](https://github.com/sp7uto/awtrix-meteomatrix)**
+**[Download v1.0.0-rc1](https://github.com/sp7uto/awtrix-meteomatrix/releases/tag/v1.0.0-rc1)** · **[Release v1.0.0-rc1](https://github.com/sp7uto/awtrix-meteomatrix/releases/tag/v1.0.0-rc1)** · **[Source code](https://github.com/sp7uto/awtrix-meteomatrix)**
 
 ## 🇵🇱 Dokumentacja po polsku
 
