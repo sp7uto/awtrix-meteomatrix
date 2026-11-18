@@ -76,3 +76,8 @@ Etapy **jeszcze niezrealizowane**: testy tłumaczenia etykiet PL/EN na urządzen
 ## Potwierdzone metody instalacji — 19.11.2026
 
 Użytkownik potwierdził działanie obu metod: instalatora Python oraz bezpośredniego wgrywania przez interfejs AWTRIX NG na TC001. Potwierdzenie dotyczy instalacji i uruchomienia aplikacji. Aktualizacja istniejącej wersji i przywracanie kopii pozostają osobnymi testami.
+
+
+## Pierwsze wydanie publiczne
+
+Opublikowano [MeteoMatrix v1.0.0-rc1](https://github.com/sp7uto/awtrix-meteomatrix/releases/tag/v1.0.0-rc1) z plikiem `MeteoMatrix.ax` i sumą SHA-256. To wersja przedpremierowa, nie ostateczne wydanie stabilne. Zobacz [opis PL/EN](../release/notes-v1.0.0-rc1.md).
