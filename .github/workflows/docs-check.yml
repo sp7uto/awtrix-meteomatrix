@@ -16,7 +16,12 @@ jobs:
           for file in README.md README_EN.md docs/PL.md docs/EN.md docs/DEVELOPMENT.md CHANGELOG.md; do
             test -s "$file"
           done
-          grep -qi 'development preview' README.md
-          grep -qi 'development preview' README_EN.md
-          grep -qi 'stable.*Berry' README.md
+          grep -Fq 'v1.0.0-rc1' README.md
+          grep -Fq 'v1.0.0-rc1' README_EN.md
+          grep -Fq 'v1.0.0-rc1' docs/PL.md
+          grep -Fq 'v1.0.0-rc1' docs/EN.md
+          grep -Fq 'SieradzMeteo v1.6' docs/PL.md
+          grep -Fq 'SieradzMeteo v1.6' docs/EN.md
+          ! grep -qi 'Projekt znajduje się na etapie przygotowawczym' docs/PL.md
+          ! grep -qi 'it has not been hardware-tested' docs/EN.md
           echo "Documentation checks passed"
