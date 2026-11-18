@@ -43,3 +43,14 @@ Do not infer verification of the transformed Berry build from successful tests o
 ## Milestone: 2026-11-18
 
 Maintainer reports the adapted MeteoMatrix application installed and working on TC001. Before stable release: document firmware version, exercise a controlled update/backup/restore, and validate language/location settings independently.
+
+
+## Installation acceptance milestone — 2026-11-19
+
+- [x] Install MeteoMatrix using the Python installer — maintainer-confirmed working on TC001.
+- [x] Install MeteoMatrix directly from the AWTRIX NG web UI — maintainer-confirmed working on TC001.
+- [ ] Update an existing MeteoMatrix version using the installer.
+- [ ] Restore previous script from backup and check behavior.
+- [ ] Record configuration and language checks for the first release.
+
+Do not conflate initial installation with update/rollback verification.
