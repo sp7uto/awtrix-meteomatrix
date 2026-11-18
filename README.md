@@ -53,7 +53,7 @@ Not affiliated with AWTRIX NG or Open-Meteo.
 
 ## Source and development installer
 
-The exact preserved **SieradzMeteo v1.6** reference is at [src/legacy/SieradzMeteo_v1_6.ax](src/legacy/SieradzMeteo_v1_6.ax). The [MeteoMatrix Berry development source](src/MeteoMatrix.ax) adds editable **latitude, longitude and timezone** through AWTRIX NG `@config` while retaining the original pixel-art bitmap table. It is **not yet verified on hardware**, now includes a PL/EN display-language switch (not yet hardware-verified) and includes the recovered v1.6 astronomy animations (untested on device).
+The exact preserved **SieradzMeteo v1.6** reference is at [src/legacy/SieradzMeteo_v1_6.ax](src/legacy/SieradzMeteo_v1_6.ax). The [MeteoMatrix Berry development source](src/MeteoMatrix.ax) adds editable **latitude, longitude and timezone** through AWTRIX NG `@config` while retaining the original pixel-art bitmap table. It is **maintainer-confirmed working on TC001**, now includes a PL/EN display-language switch (maintainer-confirmed on TC001) and includes the recovered v1.6 astronomy animations (untested on device).
 
 A standard-library Python [backup-first installer](tools/meteomatrix.py) and [Polish](docs/INSTALL_PL.md) / [English](docs/INSTALL_EN.md) installation instructions are provided **for controlled development testing only**. Nothing changes on an AWTRIX device unless `--apply` is specified.
 
@@ -72,4 +72,7 @@ The full original [SieradzMeteo v1.6](src/legacy/SieradzMeteo_v1_6.ax) (26 pages
 ### Device validation status
 
 - **SieradzMeteo v1.6 (original): verified by the maintainer as working on a physical Ulanzi TC001 / AWTRIX NG.** This is the reference implementation.
-- **MeteoMatrix development adaptation: not yet independently validated on device.** Its configurable location, PL/EN switching and update workflow require separate verification before a stable release.
+- **MeteoMatrix development adaptation: maintainer-confirmed installed and working on a physical Ulanzi TC001. Installer update/restore flows have not been separately confirmed.** Its configurable location, PL/EN switching and update workflow require separate verification before a stable release.
+
+
+**Hardware milestone (2026-11-18):** The maintainer confirms that the universal MeteoMatrix app is installed and running successfully on Ulanzi TC001. This establishes basic runtime operation, not that every locale, parameter, installer update or rollback pathway has been tested.
