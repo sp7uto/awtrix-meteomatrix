@@ -16,7 +16,7 @@
 ## Milestones
 
 - [x] Public repository and bilingual documentation
-- [x] Import verified SieradzMeteo v1.5 source (v1.6 not available yet)
+- [x] Import verified SieradzMeteo v1.6 source (v1.6 recovered and preserved)
 - [ ] Generic configuration and translated labels (coordinates/timezone and PL/EN labels implemented; device verification pending)
 - [ ] Automated validation for the real Berry source
 - [x] Initial API-based backup / conditional-update installer (hardware verification pending)
@@ -29,4 +29,4 @@ Historical SieradzMeteo version numbers are not MeteoMatrix release numbers.
 
 ## Current implementation
 
-The historical v1.5 `.ax` file is preserved unchanged in `src/legacy/`. The development `src/MeteoMatrix.ax` adds `@config` for coordinates and timezone with bitmap content preserved. PL/EN language selection is present but not hardware-verified; v1.6+ moon animation features remain outstanding. The installer has command-line read-only mode, explicit `--apply`, backup-before-update, conditional API update and source read-back checks. On ambiguous failures it does not attempt a potentially destructive automatic rollback; use explicit restore after inspection.
+The historical v1.5 `.ax` file is preserved unchanged in `src/legacy/`. The development `src/MeteoMatrix.ax` adds `@config` for coordinates and timezone with bitmap content preserved. PL/EN language selection is present but not hardware-verified; v1.6 Moon animations are now present; hardware validation remains outstanding. The installer has command-line read-only mode, explicit `--apply`, backup-before-update, conditional API update and source read-back checks. On ambiguous failures it does not attempt a potentially destructive automatic rollback; use explicit restore after inspection.
