@@ -1,3 +1,5 @@
+![MeteoMatrix — grafika tytułowa projektu dla AWTRIX NG](images/hero-meteomatrix.png)
+
 # MeteoMatrix — dokumentacja polska
 
 ## Stan projektu
