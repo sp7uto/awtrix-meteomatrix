@@ -1,6 +1,6 @@
-# Instalowanie MeteoMatrix — wersja rozwojowa
+# Instalacja MeteoMatrix v1.0.0-rc1
 
-> **Uwaga:** źródło `src/MeteoMatrix.ax` jest adaptacją zachowanego SieradzMeteo v1.6. Wersja MeteoMatrix została zainstalowana i użytkownik potwierdził jej prawidłowe działanie na TC001. Nie jest to stabilne wydanie. Etykiety PL/EN są dostępne w wersji roboczej, ale wymagają testu na urządzeniu. Animacje astronomiczne z v1.6 zostały zaimportowane; wymagają testu na urządzeniu.
+> **Status:** [v1.0.0-rc1](https://github.com/sp7uto/awtrix-meteomatrix/releases/tag/v1.0.0-rc1) to opublikowana wersja przedpremierowa oparta na sprawdzonym SieradzMeteo v1.6. Użytkownik potwierdził działanie aplikacji na TC001 po instalacji przez Python i panel AWTRIX NG. Aktualizacja istniejącej instalacji oraz przywracanie kopii wymagają osobnych testów.
 
 ## Wymagania
 
@@ -22,13 +22,13 @@ Adres `10.0.0.11` jest **wyłącznie przykładem prywatnej instalacji**; wpisz a
 
 Instalator **zawsze używa nazwy aplikacji `MeteoMatrix`**, o ile nie zmienisz jej parametrem `--name`. Nie modyfikuje aplikacji `SieradzMeteo`.
 
-## Instalacja testowa (dopiero po zatwierdzeniu źródła)
+## Instalacja wydania RC1
 
 ```bash
 python3 tools/meteomatrix.py install --host ADRES_TWOJEGO_AWTRIX --apply
 ```
 
-Po instalacji sprawdź wyświetlanie i ustawienia skryptu (Latitude, Longitude, Timezone) przez ⚙ w interfejsie AWTRIX NG. Domyślne współrzędne Sieradza są przykładem i **mogą wymagać zmiany przed użyciem**.
+Po instalacji sprawdź wyświetlanie i ustawienia skryptu (Latitude, Longitude, Timezone, Language) przez ⚙ w interfejsie AWTRIX NG. Domyślne współrzędne Sieradza są przykładem i **mogą wymagać zmiany przed użyciem**.
 
 ## Kopia bezpieczeństwa / przywracanie
 
