@@ -59,3 +59,8 @@ English display labels have been added but are not hardware-verified; v1.6 astro
 ## Verified installation paths — 2026-11-19
 
 The maintainer confirmed both supported installation paths working on TC001: the Python installer and the AWTRIX NG web interface. Upgrade-in-place and restore/rollback are pending separate confirmation.
+
+
+## First public prerelease
+
+[MeteoMatrix v1.0.0-rc1](https://github.com/sp7uto/awtrix-meteomatrix/releases/tag/v1.0.0-rc1) ships a Berry `.ax` file and SHA-256 checksum. It is a prerelease, not the stable v1.0.0. Read the [bilingual release notes](../release/notes-v1.0.0-rc1.md).
