@@ -1,6 +1,6 @@
 # MeteoMatrix installation — development build
 
-> **Warning:** `src/MeteoMatrix.ax` is a preliminary adaptation of the preserved SieradzMeteo v1.6 source. It has not been verified on a physical TC001. It is **not a stable release**. PL/EN display labels have been added but are untested on hardware; v1.6 astronomy animations are imported and awaiting hardware validation.
+> **Warning:** `src/MeteoMatrix.ax` is a preliminary adaptation of the preserved SieradzMeteo v1.6 source. The MeteoMatrix adaptation has been installed and confirmed working on a physical TC001 by the maintainer. It is **not a stable release**. PL/EN display labels have been added but are untested on hardware; v1.6 astronomy animations are imported and awaiting hardware validation.
 
 ## Requirements
 
