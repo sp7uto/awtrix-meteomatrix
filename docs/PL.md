@@ -62,4 +62,4 @@ Zobacz też [zasady rozwoju](DEVELOPMENT.md) oraz [README](../README.md).
 - [Instalator Python](../tools/meteomatrix.py)
 - [Instrukcja instalacji testowej](INSTALL_PL.md)
 
-Etapy **jeszcze niezrealizowane**: pełne tłumaczenie etykiet PL/EN, późniejsze grafiki astronomiczne, testy na urządzeniu i stabilne wydanie.
+Etapy **jeszcze niezrealizowane**: testy tłumaczenia etykiet PL/EN na urządzeniu, późniejsze grafiki astronomiczne, testy na urządzeniu i stabilne wydanie.
