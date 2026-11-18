@@ -1,3 +1,5 @@
+![MeteoMatrix — universal weather dashboard for AWTRIX NG and Ulanzi TC001](docs/images/hero-meteomatrix.png)
+
 # MeteoMatrix — AWTRIX NG weather & environment dashboard
 
 **Status: development preview. No installable Berry file is available yet.**
