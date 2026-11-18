@@ -25,3 +25,12 @@ An installer will only be released after confirming the supported AWTRIX NG API 
 Open-Meteo data availability varies by region and season, especially for pollen.
 
 See the [development policy](DEVELOPMENT.md) and [main README](../README.md).
+
+
+## Project illustrations
+
+![MeteoMatrix feature overview](images/features-grid.svg)
+
+![MeteoMatrix data flow](images/how-it-works.svg)
+
+These illustrations show the planned features and data flow. They are not real screenshots of a released device build.
