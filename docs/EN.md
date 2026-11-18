@@ -45,9 +45,12 @@ These illustrations show the planned features and data flow. They are not real s
 - [Python installer](../tools/meteomatrix.py)
 - [Development installation guide](INSTALL_EN.md)
 
-English display labels have been added but are not hardware-verified; v1.6 astronomy animations are imported; hardware validation is not complete.
+English display labels have been added but are not hardware-verified; v1.6 astronomy animations are imported; update and rollback validation are not complete.
 
 
 ## Confirmed device behavior
 
-**The original SieradzMeteo v1.6 has been verified working on a Ulanzi TC001 by the maintainer.** It is the baseline. The modified MeteoMatrix version still requires an independent on-device test before a stable release.
+**The original SieradzMeteo v1.6 has been verified working on a Ulanzi TC001 by the maintainer.** It is the baseline. The modified MeteoMatrix version is now maintainer-confirmed installed and working on TC001. Update and restore workflows still need separate verification.
+
+
+**Milestone — 2026-11-18:** the maintainer confirms that MeteoMatrix is installed and working on TC001. This does not independently verify all settings, updates or rollback.
