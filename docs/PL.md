@@ -71,3 +71,8 @@ Etapy **jeszcze niezrealizowane**: testy tłumaczenia etykiet PL/EN na urządzen
 
 
 **Kamień milowy — 18.11.2026:** użytkownik potwierdził poprawne działanie zainstalowanego MeteoMatrix na TC001. Nie jest to jeszcze test wszystkich ustawień ani mechanizmu aktualizacji/przywracania.
+
+
+## Potwierdzone metody instalacji — 19.11.2026
+
+Użytkownik potwierdził działanie obu metod: instalatora Python oraz bezpośredniego wgrywania przez interfejs AWTRIX NG na TC001. Potwierdzenie dotyczy instalacji i uruchomienia aplikacji. Aktualizacja istniejącej wersji i przywracanie kopii pozostają osobnymi testami.
