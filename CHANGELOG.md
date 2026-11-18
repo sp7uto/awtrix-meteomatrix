@@ -11,4 +11,7 @@
 - Added preliminary `src/MeteoMatrix.ax` with latitude, longitude and timezone settings, preserving glyph bitmaps.
 - Added Python backup-first development installer with explicit write opt-in and conditional update API.
 - Added safety tests, GitHub Actions checks, and bilingual installation guides.
-- Physical TC001 validation, bilingual screen labels and v1.6 sun/moon animations remain pending.
+- Physical TC001 validation, PL/EN labels require hardware testing; v1.6 sun/moon animations remain pending.
+
+- Added a development PL/EN label selector to MeteoMatrix; preserved existing glyph bitmaps.
+- Changed new script installation to atomic compare-and-swap to avoid overwriting concurrent changes.
