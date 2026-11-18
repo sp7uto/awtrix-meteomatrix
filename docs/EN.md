@@ -40,9 +40,9 @@ These illustrations show the planned features and data flow. They are not real s
 
 ## Source and development testing
 
-- [Preserved v1.5 original](../src/legacy/SieradzMeteo_v1_5.ax)
+- [Preserved v1.5 original](../src/legacy/SieradzMeteo_v1_6.ax)
 - [MeteoMatrix development source](../src/MeteoMatrix.ax)
 - [Python installer](../tools/meteomatrix.py)
 - [Development installation guide](INSTALL_EN.md)
 
-English display labels have been added but are not hardware-verified; later astronomy animations and hardware validation are not complete.
+English display labels have been added but are not hardware-verified; v1.6 astronomy animations are imported; hardware validation is not complete.
