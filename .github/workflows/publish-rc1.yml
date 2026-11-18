@@ -1,0 +1,57 @@
+name: Publish MeteoMatrix v1.0.0-rc1
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'release/trigger-v1.0.0-rc1.txt'
+permissions:
+  contents: write
+concurrency:
+  group: publish-meteomatrix-v1.0.0-rc1
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact revision
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Validate release metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s src/MeteoMatrix.ax
+          test -s release/notes-v1.0.0-rc1.md
+          grep -Fx '# @name MeteoMatrix' src/MeteoMatrix.ax
+          grep -Fx '# @version 1.0.0-rc1' src/MeteoMatrix.ax
+          grep -Fq 'def draw_event()' src/MeteoMatrix.ax
+          grep -Fq 'def draw_phase()' src/MeteoMatrix.ax
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run safety tests
+        run: python3 -m unittest discover -s tests -v
+      - name: Prepare downloadable artifacts
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+          cp src/MeteoMatrix.ax dist/MeteoMatrix.ax
+          (cd dist && sha256sum MeteoMatrix.ax > MeteoMatrix.ax.sha256)
+      - name: Publish GitHub prerelease (no device changes)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh release view v1.0.0-rc1 >/dev/null 2>&1; then
+            echo 'Release already exists; refusing to overwrite it.'
+            exit 1
+          fi
+          gh release create v1.0.0-rc1 dist/MeteoMatrix.ax dist/MeteoMatrix.ax.sha256 \
+            --target "$GITHUB_SHA" \
+            --title "MeteoMatrix v1.0.0-rc1" \
+            --notes-file release/notes-v1.0.0-rc1.md \
+            --prerelease
