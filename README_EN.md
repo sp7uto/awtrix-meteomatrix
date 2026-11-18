@@ -43,3 +43,8 @@ No hardware verification has been performed; bilingual display labels are implem
 ### Original v1.6 recovered
 
 [Source: SieradzMeteo v1.6](src/legacy/SieradzMeteo_v1_6.ax) is now archived unmodified, including all 26 pages and Sun/Moon animations. [MeteoMatrix.ax](src/MeteoMatrix.ax) is based on that source with configurable coordinates, timezone and PL/EN labels. Hardware validation is pending.
+
+
+### Hardware verification
+
+The original **SieradzMeteo v1.6 is confirmed by the maintainer to work on the Ulanzi TC001**. The modified, location-configurable MeteoMatrix adaptation still needs a separate on-device acceptance test.
