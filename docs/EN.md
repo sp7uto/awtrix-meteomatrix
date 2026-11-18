@@ -4,7 +4,7 @@
 
 ## Current status
 
-**[MeteoMatrix v1.0.0-rc1](https://github.com/sp7uto/awtrix-meteomatrix/releases/tag/v1.0.0-rc1) is published.** This is a public **release candidate**, not the final stable v1.0.0. It is based on the tested **SieradzMeteo v1.6**, not v1.5.
+**[MeteoMatrix v1.0.0-rc1](https://github.com/sp7uto/awtrix-meteomatrix/releases/tag/v1.0.0-rc1) is published.** This is a public **release candidate**, not the final stable v1.0.0. It is based on the tested **SieradzMeteo v1.6**.
 
 The maintainer has confirmed successful operation on a physical **Ulanzi TC001 / AWTRIX NG**, following installation **by both the Python installer and the AWTRIX NG web interface**. Upgrade-in-place and restoration/rollback still require separate device verification.
 
