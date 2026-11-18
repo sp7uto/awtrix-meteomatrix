@@ -28,3 +28,13 @@ See [English development notes](docs/EN.md), [Polish documentation](docs/PL.md),
 ![How MeteoMatrix works](docs/images/how-it-works.svg)
 
 These are conceptual illustrations of planned features, not screenshots of an installed release.
+
+
+## Development sources and installer
+
+- [Preserved original Berry source (v1.5)](src/legacy/SieradzMeteo_v1_5.ax)
+- [MeteoMatrix .ax development adaptation](src/MeteoMatrix.ax) — configurable latitude, longitude and timezone, with original glyph table preserved
+- [Installer (Python standard library)](tools/meteomatrix.py)
+- [Development installation guide](docs/INSTALL_EN.md) and [Polish guide](docs/INSTALL_PL.md)
+
+No hardware verification has been performed; bilingual display labels and the newer moon/sun animations are still pending. The installer defaults to a dry run and requires `--apply` for any write.
