@@ -51,3 +51,8 @@ The original **SieradzMeteo v1.6 is confirmed by the maintainer to work on the U
 
 
 **Hardware milestone (2026-11-18):** The maintainer confirms MeteoMatrix was installed and runs successfully on TC001. This does not yet verify every language/location combination or the installer’s backup/restore path.
+
+
+### Installation verified on TC001
+
+The maintainer reports successful installation and operation by **both the Python installer and the AWTRIX NG web interface** (2026-11-19). Updating an existing installation and rollback are not yet separately confirmed.
