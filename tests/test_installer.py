@@ -34,7 +34,7 @@ class GuardrailTests(unittest.TestCase):
         self.assertIn('store.get("timezone")', source)
 
     def test_bitmap_preservation(self):
-        original = (ROOT / "src" / "legacy" / "SieradzMeteo_v1_5.ax").read_text(encoding="utf-8")
+        original = (ROOT / "src" / "legacy" / "SieradzMeteo_v1_6.ax").read_text(encoding="utf-8")
         derived = (ROOT / "src" / "MeteoMatrix.ax").read_text(encoding="utf-8")
         import re
         pattern = r'self\.glyphs = \[[\s\S]*?\n    \]'
@@ -45,6 +45,8 @@ class GuardrailTests(unittest.TestCase):
         self.assertIn('# @config language select', source)
         self.assertIn('store.get("language")', source)
         self.assertIn('self.tr("DESZCZ ","RAIN ")', source)
+        self.assertIn("def draw_event()", source)
+        self.assertIn("def draw_phase()", source)
 
     def test_dry_run_makes_no_write(self):
         args = argparse.Namespace(name="MeteoMatrix", user=None, host="http://test.invalid",
