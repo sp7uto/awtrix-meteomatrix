@@ -54,3 +54,8 @@ English display labels have been added but are not hardware-verified; v1.6 astro
 
 
 **Milestone — 2026-11-18:** the maintainer confirms that MeteoMatrix is installed and working on TC001. This does not independently verify all settings, updates or rollback.
+
+
+## Verified installation paths — 2026-11-19
+
+The maintainer confirmed both supported installation paths working on TC001: the Python installer and the AWTRIX NG web interface. Upgrade-in-place and restore/rollback are pending separate confirmation.
