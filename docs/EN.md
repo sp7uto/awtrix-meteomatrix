@@ -4,7 +4,7 @@
 
 ## Project status
 
-This is a **development preview**. No verified, installable Berry `.ax` file is published. Do not replace a working weather application with this repository scaffold.
+This is a **development preview**. A development Berry `.ax` adaptation is published, but it has not been hardware-tested and is not a stable release. Do not replace a working weather application with this repository scaffold.
 
 ## Purpose
 
@@ -36,3 +36,13 @@ See the [development policy](DEVELOPMENT.md) and [main README](../README.md).
 ![MeteoMatrix data flow](images/how-it-works.svg)
 
 These illustrations show the planned features and data flow. They are not real screenshots of a released device build.
+
+
+## Source and development testing
+
+- [Preserved v1.5 original](../src/legacy/SieradzMeteo_v1_5.ax)
+- [MeteoMatrix development source](../src/MeteoMatrix.ax)
+- [Python installer](../tools/meteomatrix.py)
+- [Development installation guide](INSTALL_EN.md)
+
+English display labels, later astronomy animations and hardware validation are not complete.
