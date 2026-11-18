@@ -17,3 +17,12 @@ Users will be able to configure latitude, longitude, timezone and display langua
 Verified, tagged GitHub releases are planned, together with a backup-first update mechanism and rollback. The implementation and device API must be tested before an installation command is published.
 
 See [English development notes](docs/EN.md), [Polish documentation](docs/PL.md), and [main README](README.md).
+
+
+## Visual overview
+
+![MeteoMatrix feature overview](docs/images/features-grid.svg)
+
+![How MeteoMatrix works](docs/images/how-it-works.svg)
+
+These are conceptual illustrations of planned features, not screenshots of an installed release.
