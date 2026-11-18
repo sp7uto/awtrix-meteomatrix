@@ -4,7 +4,7 @@
 - Initialized `sp7uto/awtrix-meteomatrix`.
 - Added bilingual project and developer documentation.
 - Defined portable location settings, approved animation preservation and safe-update requirements.
-- No installable Berry file is released yet.
+- Initially no Berry file was released; the first public pre-release is v1.0.0-rc1.
 
 ## Development scaffold — 2026-11-18
 - Imported exact available SieradzMeteo v1.6 Berry source to `src/legacy/`.
@@ -27,3 +27,10 @@
 - 2026-11-18: Maintainer confirmed universal MeteoMatrix installed and functioning on Ulanzi TC001; release, update and restore qualification remain separate.
 
 - 2026-11-19: Maintainer confirmed successful TC001 installation by both the Python installer and the AWTRIX NG web UI; upgrade and rollback checks remain outstanding.
+
+
+## v1.0.0-rc1 — public prerelease
+- Published tagged GitHub prerelease with MeteoMatrix.ax and SHA-256 checksum.
+- Ran automated checks in the publishing workflow.
+- Installation confirmed on TC001 via Python tool and AWTRIX NG web panel.
+- Upgrade/rollback verification remains open.
