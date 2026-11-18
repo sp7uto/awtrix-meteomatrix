@@ -57,9 +57,9 @@ Zobacz też [zasady rozwoju](DEVELOPMENT.md) oraz [README](../README.md).
 
 ## Kod i instrukcja rozwojowa
 
-- [Historyczny oryginał SieradzMeteo v1.5](../src/legacy/SieradzMeteo_v1_5.ax)
+- [Historyczny oryginał SieradzMeteo v1.6](../src/legacy/SieradzMeteo_v1_6.ax)
 - [Roboczy skrypt MeteoMatrix](../src/MeteoMatrix.ax) — konfiguracja szerokości i długości geograficznej oraz strefy czasowej
 - [Instalator Python](../tools/meteomatrix.py)
 - [Instrukcja instalacji testowej](INSTALL_PL.md)
 
-Etapy **jeszcze niezrealizowane**: testy tłumaczenia etykiet PL/EN na urządzeniu, późniejsze grafiki astronomiczne, testy na urządzeniu i stabilne wydanie.
+Etapy **jeszcze niezrealizowane**: testy tłumaczenia etykiet PL/EN na urządzeniu, grafiki astronomiczne v1.6 (zaimportowane, do weryfikacji), testy na urządzeniu i stabilne wydanie.
