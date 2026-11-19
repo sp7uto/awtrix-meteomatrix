@@ -68,15 +68,19 @@ jobs:
             name="$(basename "$src")"
             dest="./$name"
 
-            # Respect a manually maintained Wiki Home and sidebar. Likewise,
-            # refuse to replace any other page not marked as managed.
+            # Home is intentionally adopted from the initial manually created
+            # Wiki page. Its previous contents remain in the Wiki Git history.
+            # All other existing pages must be explicitly managed to update.
             if [ -f "$dest" ] && ! grep -Fqx "$marker" "$dest"; then
-              if [ "$name" = "Home.md" ] || [ "$name" = "_Sidebar.md" ]; then
+              if [ "$name" = "Home.md" ]; then
+                echo "Adopting original Home.md; recovery commit: $(git rev-parse HEAD)"
+              elif [ "$name" = "_Sidebar.md" ]; then
                 echo "Preserved manually maintained $name"
                 continue
+              else
+                echo "::error file=$name::Refusing to overwrite an existing unmanaged Wiki page."
+                exit 1
               fi
-              echo "::error file=$name::Refusing to overwrite an existing unmanaged Wiki page."
-              exit 1
             fi
 
             { printf '%s\n\n' "$marker"; cat "$src"; } > "$dest"
