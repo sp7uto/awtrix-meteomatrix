@@ -2,7 +2,7 @@
 
 # MeteoMatrix — weather, air quality & astronomy for AWTRIX NG
 
-[Polski](docs/PL.md) · [English documentation](docs/EN.md)
+[Polski](docs/PL.md) · [English documentation](docs/EN.md) · [Wiki — user guide](https://github.com/sp7uto/awtrix-meteomatrix/wiki)
 
 **Latest published release: [v1.0.0-rc1](https://github.com/sp7uto/awtrix-meteomatrix/releases/tag/v1.0.0-rc1)** — public release candidate, not stable v1.0.0.
 
