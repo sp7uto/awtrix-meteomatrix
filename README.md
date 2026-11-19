@@ -29,6 +29,7 @@ Sieradz (51.590748, 18.736974, Europe/Warsaw) is a sample configuration only; no
 - [ ] Publish a stable v1.0.0 after release qualification.
 
 ## Documentation
+- [MeteoMatrix Wiki — user guide (PL/EN)](https://github.com/sp7uto/awtrix-meteomatrix/wiki)
 - [Polska dokumentacja](docs/PL.md)
 - [English guide](README_EN.md)
 - [Development and release policy](docs/DEVELOPMENT.md)
